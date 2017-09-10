@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Schema2</title>
+    <link rel="stylesheet" href="style.css" media="screen" title="no title">
+    <link rel="stylesheet" href="swiper.css">
+    <link rel="stylesheet" href="reset.css" media="screen" title="no title">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <script src="jquery-3.1.1.min.js"></script>
+  </head>
+  <body>
+    <div id="divSchema">
+
+      <div class="barTop">
+        <div class="weekBtn">
+          <p>36</p>
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="704" height="512" viewBox="0 0 704 512">
+          <g id="icomoon-ignore">
+          </g>
+          <path d="M0 96h448v96h-448v-96zM0 224h448v96h-448v-96zM0 352h448v96h-448v-96z"></path>
+          <path d="M496 224l96 96 96-96z"></path>
+          </svg>
+          <!-- ▼ -->
+        </div>
+
+        <p class="barName">Schema</p>
+
+        <div class="settingsBtn">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+          <g id="icomoon-ignore">
+          </g>
+          <path d="M466.895 305.125c-26.863-46.527-10.708-106.152 36.076-133.244l-50.313-87.146c-14.375 8.427-31.088 13.259-48.923 13.259-53.768 0-97.354-43.873-97.354-97.995h-100.629c0.133 16.705-4.037 33.641-12.979 49.126-26.862 46.528-86.578 62.351-133.431 35.379l-50.312 87.146c14.485 8.236 27.025 20.294 35.943 35.739 26.819 46.454 10.756 105.96-35.854 133.112l50.313 87.146c14.325-8.348 30.958-13.127 48.7-13.127 53.598 0 97.072 43.596 97.35 97.479h100.627c-0.043-16.537 4.136-33.285 12.983-48.609 26.818-46.453 86.388-62.297 133.207-35.506l50.313-87.145c-14.39-8.233-26.846-20.249-35.717-35.614zM256 359.666c-57.254 0-103.668-46.412-103.668-103.667 0-57.254 46.413-103.667 103.668-103.667s103.666 46.413 103.666 103.667c-0.001 57.255-46.412 103.667-103.666 103.667z"></path>
+          </svg>
+        </div>
+      </div>
+
+      <div class="swiper-containerSchema">
+
+          <div class="swiper-pagination" id="swiper-paginationSchema">
+                <div class="divdag 1 6 7 divDag0" id="dmon">Mån</div>
+                <div class="divdag 2 divDag1" id="dtue">Tis</div>
+                <div class="divdag 3 divDag2" id="dwed">Ons</div>
+                <div class="divdag 4 divDag3" id="dthu">Tor</div>
+                <div class="divdag 5 divDag4" id="dfri">Fre</div>
+          </div>
+          <div class="swiper-wrapper" id="swiper-wrapper">
+
+          </div>
+        </div>
+
+        <div class="barBottom">
+          <ul class="barUl">
+            <!-- <li class="barLi" id="1">
+
+            </li> -->
+          </ul>
+        </div>
+
+    </div>
+
+    <div id="settings">
+      <div class="barTop">
+        <p class="barName">Inställningar</p>
+        <div id="goBack">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+          <g id="icomoon-ignore">
+          </g>
+          <path class="fill" d="M201.373 438.627l-160-160c-12.497-12.496-12.497-32.758 0-45.255l160-160c12.497-12.496 32.758-12.496 45.255 0s12.497 32.758 0 45.255l-105.373 105.373h306.745c17.673 0 32 14.327 32 32s-14.327 32-32 32h-306.745l105.373 105.373c6.248 6.248 9.372 14.438 9.372 22.627s-3.124 16.379-9.372 22.627c-12.497 12.497-32.758 12.497-45.255 0z"></path>
+          </svg>
+        </div>
+      </div>
+      <div class="scheman">
+        <p>Scheman:</p>
+        <ul id='schemanUl'>
+        </ul>
+      </div>
+      <div id="addSchedule" class="btn">Lägg till schema <span style='font-size:16px;'>+</span></div>
+      <div id="addScheduleModal">
+        <input id="schemeInputFirst" type="input" name="name" value="" placeholder="Förnamn" autofocus="autofocus">
+        <input id="schemeInputLast" type="input" name="name" value="" placeholder="Efternamn">
+        <div id="scheduleModalBtn" class="btn">Hämta schema ⇩</div>
+      </div>
+
+
+      <div id="changeColor" class="btn">Ändra färgtema ✎</div>
+      <input id="colorInput" type="input" name="name" value="" placeholder="Skriv på eng exv blue alt. hex color (#xxxxxx)" autofocus="autofocus">
+
+    </div>
+
+    <div id="intro">
+      <h2 id="welcome">Välkommen</h2>
+      <p>Vänligen skriv in</p>
+      <input id="firstInput" type="input" name="name" value="" placeholder="Förnamn" autofocus="autofocus">
+      <p>och</p>
+      <input id="lastInput" type="input" name="name" value="" placeholder="Efternamn">
+      <div id="introBtn">Fortsätt</div>
+    </div>
+
+    <script src="swiper.jquery.js"></script>
+    <script src="main.js"></script>
+
+  </body>
+</html>
