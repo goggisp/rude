@@ -60,7 +60,7 @@ function getInfo() {
     console.log('\''+name+'\'');
 
     var req = new XMLHttpRequest();
-    req.open('POST', 'http://localhost:3000', true);
+    req.open('POST', 'http://178.62.210.139', true);
     req.setRequestHeader('Content-Type', 'application/json');
     req.send(JSON.stringify({name: name}));
     req.addEventListener('load', function() {
@@ -211,7 +211,7 @@ function addSchedule() {
     console.log('\''+name+'\'');
 
     var req = new XMLHttpRequest();
-    req.open('POST', 'http://localhost:3000', true);
+    req.open('POST', 'http://178.62.210.139', true);
     req.setRequestHeader('Content-Type', 'application/json');
     req.send(JSON.stringify({name: name}));
     req.addEventListener('load', function() {
