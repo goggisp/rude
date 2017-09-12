@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Schema2</title>
+    <title>Rudebecks Schema</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css" media="screen" title="no title">
     <link rel="stylesheet" href="swiper.css">
@@ -15,14 +15,12 @@
 
       <div class="barTop">
         <div class="weekBtn">
-          <p>36</p>
-          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="704" height="512" viewBox="0 0 704 512">
-          <g id="icomoon-ignore">
-          </g>
-          <path d="M0 96h448v96h-448v-96zM0 224h448v96h-448v-96zM0 352h448v96h-448v-96z"></path>
-          <path d="M496 224l96 96 96-96z"></path>
-          </svg>
-          <!-- ▼ -->
+          <p><span id="weekNo"></span><span id="weekArrow">▼<span></p>
+        </div>
+        <div class="weekModal">
+          <ul>
+            <li>Välj vecka:</li>
+          </ul>
         </div>
 
         <p class="barName">Schema</p>
@@ -39,11 +37,7 @@
       <div class="swiper-containerSchema">
 
           <div class="swiper-pagination" id="swiper-paginationSchema">
-                <div class="divdag 1 6 7 divDag0" id="dmon">Mån</div>
-                <div class="divdag 2 divDag1" id="dtue">Tis</div>
-                <div class="divdag 3 divDag2" id="dwed">Ons</div>
-                <div class="divdag 4 divDag3" id="dthu">Tor</div>
-                <div class="divdag 5 divDag4" id="dfri">Fre</div>
+
           </div>
           <div class="swiper-wrapper" id="swiper-wrapper">
 
@@ -52,9 +46,7 @@
 
         <div class="barBottom">
           <ul class="barUl">
-            <!-- <li class="barLi" id="1">
 
-            </li> -->
           </ul>
         </div>
 
@@ -76,6 +68,7 @@
         <ul id='schemanUl'>
         </ul>
       </div>
+      <div id="removeScheduleBtn" class="btn">Redigera ≡</div>
       <div id="addSchedule" class="btn">Lägg till schema <span style='font-size:16px;'>+</span></div>
       <div id="addScheduleModal">
         <input id="schemeInputFirst" type="input" name="name" value="" placeholder="Förnamn" autofocus="autofocus">
@@ -83,16 +76,17 @@
         <div id="scheduleModalBtn" class="btn">Hämta schema ⇩</div>
       </div>
 
-
       <div id="changeColor" class="btn">Ändra färgtema ✎</div>
-      <input id="colorInput" type="input" name="name" value="" placeholder="Skriv på eng exv blue alt. hex color (#xxxxxx)" autofocus="autofocus">
-
+      <input id="colorInput" type="input" name="name" value="" placeholder="Skriv på eng exv blue alt. hex color (#XXXXXX)">
+      <div id="creator"><p>Thim Högberg</p>
+        <p>hogberg.thim@gmail.com</p>
+      </div>
     </div>
 
     <div id="intro">
       <h2 id="welcome">Välkommen</h2>
       <p>Vänligen skriv in</p>
-      <input id="firstInput" type="input" name="name" value="" placeholder="Förnamn" autofocus="autofocus">
+      <input id="firstInput" type="input" name="name" value="" placeholder="Förnamn">
       <p>och</p>
       <input id="lastInput" type="input" name="name" value="" placeholder="Efternamn">
       <div id="introBtn">Fortsätt</div>

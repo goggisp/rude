@@ -8,10 +8,16 @@ body {
 #divSchema {
   width: 100%;
   height: 100%;
+  overflow: hidden;
+}
+
+input {
+  border-radius: 0px;
+  outline: none;
 }
 
 .barTop {
-  height: 80px;
+  height: 60px;
   width: 100%;
   position: fixed;
   top: 0;
@@ -19,7 +25,7 @@ body {
   background-color: red;
   z-index: 2;
   color: white;
-  box-shadow: 0px 1px 2px rgba(44,62,80,0.15);
+  box-shadow: 0px 3px 3px rgba(44,62,80,0.15);
 }
 
 
@@ -27,7 +33,7 @@ body {
   width: 100%;
   height: 100%;
   position: absolute;
-  top: 30px;
+  top: 20px;
   font-size: 20px;
   display: flex;
   justify-content: center;
@@ -36,21 +42,61 @@ body {
 .barTop svg{
   fill: white;
   position: absolute;
-  top: 30px;
+  top: 20px;
 }
 
-.weekBtn p{
+.weekBtn {
   left: 20px;
-  top: 31.5px;
+  top: 16.5px;
   position: absolute;
-  font-size: 20px;
+  font-size: 22.5px;
+  font-weight: bold;
+  z-index: 3;
+}
+
+.weekModal {
+  display: none;
+  position: fixed;
+  top:50px;
+  left: 55px;
+  min-height: 50px;
+  max-height: calc(100% - 130px);
+  width: 200px;
+  background-color: #b3b3b3;
+  z-index: 1000000;
+  overflow: auto;
+  box-shadow: 3px 3px 5px rgba(44,62,80,0.15);
+}
+
+.weekModal ul {
+  font-size: 16px;
+  padding: 10px;
+}
+
+.weekModal ul li:first-child {
+  margin-bottom: 5px;
+}
+
+.weekModalLi{
+  margin-bottom: 5px;
+}
+
+.weekModalLi:hover {
+  cursor: pointer;
+}
+
+.modalLiNo {
   font-weight: bold;
 }
 
-.weekBtn svg {
+/*.weekBtn svg {
   left: 50px;
   height: 27.5px;
   width: 27.5px;
+}*/
+
+.weekBtn:hover {
+  cursor: pointer;
 }
 
 .settingsBtn svg, #goBack svg {
@@ -73,7 +119,7 @@ body {
   color: white;
   font-weight: bold;
   z-index: 5;
-  box-shadow: 0px -1px 2px rgba(0,0,0,0.15);
+  box-shadow: 0px -1px 1px rgba(0,0,0,0.15);
 }
 
 .barUl {
@@ -107,6 +153,7 @@ svg {
   fill: grey;
 }
 
+
 /*SETTINGS*/
 #settings {
   display: none;
@@ -118,9 +165,10 @@ svg {
   width: 100%;
   background-color: #edf0f1;
   overflow: none;
-  padding: 90px 10px 10px;
+  padding: 70px 10px 10px;
   /*-webkit-overflow-scrolling: touch;*/
   font-size: 16px;
+  overflow: auto;
 }
 
 .scheman p {
@@ -146,7 +194,11 @@ svg {
   display: none;
   min-height: 20px;
   width: 100%;
-  z-index: 1000;
+  z-index: 5;
+}
+
+#addScheduleModal input {
+  text-transform: capitalize;
 }
 
 #schemeInputFirst {
@@ -179,7 +231,7 @@ svg {
   left: 15%;
 }
 
-#addSchedule:hover, #changeColor:hover, #scheduleModalBtn:hover {
+#settings .btn:hover, .removeSchedule {
   cursor: pointer;
 }
 
@@ -196,15 +248,42 @@ svg {
   width: 100%;
   height: 30px;
   margin-top: 10px;
-  font-size: 14px;
+  font-size: 16px;
   padding-left: 2.5px;
   outline: none;
-  text-transform: capitalize;
 }
 
 #settings input:focus {
   border: 1.5px solid red;
 }
+
+#removeScheduleBtn {
+  min-width: 50px;
+  margin-top: 7.5px;
+  float: right;
+}
+
+.removeSchedule {
+  fill: red;
+  height: 17px;
+  width: 17px;
+  float: right;
+  display: none;
+}
+
+#creator {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  width: 100%;
+  font-size: 14px;
+  color: #bfbfbf;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 5px;
+  align-items: center;
+}
+
 
 /*INTRO*/
 #intro {
@@ -261,8 +340,6 @@ svg {
   cursor: pointer;
 }
 
-
-
 .swiper-containerSchema {
   width: 100%;
   margin: 80px 0 100px;
@@ -282,7 +359,7 @@ svg {
   width: 100%;
   height: 100%;
   position: relative;
-  top: 35px;
+  top: 15px;
 }
 
 .swiper-containerSchema .swiper-pagination-bullet {
@@ -292,14 +369,14 @@ svg {
   background-color: #edf0f1;
   font-size: 16px;
   font-family: 'Roboto', sans-serif;
-
 }
 
 .swiper-containerSchema .swiper-pagination  {
   position: fixed;
   width: 100%;
-  top: 90px;
+  top: 70px;
   margin-bottom: 50px;
+  z-index:2;
 }
 
 .swiper-containerSchema .swiper-pagination-bullet-active  {
