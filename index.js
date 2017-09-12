@@ -34,11 +34,8 @@ app.listen(3000, function() {
 function getInfo(name, callback) {
   request('https://www.novasoftware.se/webviewer/(S(30gpycqpe4gvwj453yaxiwzi))/MZDesign1.aspx?schoolid=93700&code=969640&type=3', function (error, response, body){
     console.log(name);
-
     var requestedId = body.substring(body.indexOf(name) - 45, body.indexOf(name)-7);
     console.log(requestedId);
-
     callback(requestedId);
-    // fs.writeFileSync('dump.html', body, 'utf8');
   });
 };
