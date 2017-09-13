@@ -57,13 +57,12 @@ function getInfo() {
     var name = (lastName + ', ' + firstName);
 
     var req = new XMLHttpRequest();
-    req.open('POST', 'http://178.62.210.139', true);
+    req.open('POST', 'http://178.62.210.139/', true);
     req.setRequestHeader('Content-Type', 'application/json');
     req.send(JSON.stringify({name: name}));
     req.addEventListener('load', function() {
       var requestedId = (JSON.parse(req.responseText)).requestedId;
       requestedId = requestedId.substring(requestedId.indexOf('{')+1, requestedId.indexOf('}'));
-      console.log(requestedId);
 
       if (requestedId !== '') {
         $('#intro').slideUp();
@@ -94,6 +93,13 @@ function getInfo() {
           $('#1barLi').find('p').css('color', 'red');
           restart();
         }
+
+	 if((localStorage.length-1)/2 < $('.barLi').length) {
+          location.reload();
+          console.log('Y u max the submit btn?');
+        }
+
+
         //reloadiframes först eftersom resten hämtar från DOM
         reloadIframes();
         $.when($.ajax(appendWeeks())).then(setWeek());
@@ -338,7 +344,7 @@ function addSchedule() {
     var name = (lastName + ', ' + firstName);
 
     var req = new XMLHttpRequest();
-    req.open('POST', 'http://178.62.210.139', true);
+    req.open('POST', 'http://178.62.210.139/', true);
     req.setRequestHeader('Content-Type', 'application/json');
     req.send(JSON.stringify({name: name}));
     req.addEventListener('load', function() {
