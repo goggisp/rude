@@ -294,6 +294,8 @@ svg {
   align-items: center;
   font-size: 18px;
   font-family: 'Roboto', sans-serif;
+  overflow: hidden;
+  position: relative;
 }
 
 #welcome {
@@ -337,6 +339,40 @@ svg {
 
 #introBtn:focus, #introBtn:hover {
   cursor: pointer;
+}
+
+#disclaimer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 5px;
+  color: grey;
+  margin-bottom: 25px;
+}
+
+#disclaimer p{
+  text-align: center;
+  margin: 0 5px 0 0;
+
+}
+
+#disclaimerCreator {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  color: grey;
+  position: absolute;
+  font-size: 14px;
+  margin-bottom: 5px;
 }
 
 .swiper-containerSchema {

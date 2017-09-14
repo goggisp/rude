@@ -113,6 +113,19 @@ function getInfo() {
   }
 }
 
+if(localStorage.length < 4) {
+  $('#divSchema .barName').text('Lägg till fler scheman →');
+}
+
+if(localStorage.length > 1) {
+  $('#welcome').text('Välkommen tillbaka!');
+}
+
+if (localStorage.length < 2) {
+  $('#disclaimer').append('<p>Rudebecks.me är fristående från Rudebecks.se, ingen data är följaktligen hämtad från skolans hemsida.</p>');
+  $('#disclaimerCreator').append('<p>Thim Högberg</p> <p>hogberg.thim@gmail.com</p>')
+}
+
 $('#removeScheduleBtn').click(function() {
   $('.removeSchedule').slideToggle(200);
 })
@@ -374,6 +387,8 @@ function addSchedule() {
         } else {
           $('#' + localStorage.key(currentId)+'barLi').find('p').css('color', 'red');
         }
+
+	$('#divSchema .barName').text('Schema');
 
         restart();
         setWeek();
