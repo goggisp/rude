@@ -113,10 +113,6 @@ function getInfo() {
   }
 }
 
-if(localStorage.length < 4) {
-  $('#divSchema .barName').text('Lägg till fler scheman →');
-}
-
 if(localStorage.length > 1) {
   $('#welcome').text('Välkommen tillbaka!');
 }
@@ -217,12 +213,28 @@ if (today.getDay() == 6 || today.getDay() == 0) {
   //initial slide blir således måndag
   todayDay = 1;
   iframeWeek = iframeWeek + 1;
-  $('.barName').text('Trevlig helg /TH');
+  $('#divSchema .barName').text('Trevlig helg /TH');
+  $('#divSchema .barName').hide();
+  $('#divSchema .barName').delay(2500).fadeIn().delay(2000).fadeOut();
+  setTimeout( function() {
+    $('#divSchema .barName').hide();
+    $('#divSchema .barName').text('Visar nästa veckas schema');
+    $('#divSchema .barName').fadeIn();
+  }, 6000);
 }
 
+if(localStorage.length < 4 && today.getDay() !== 6 && today.getDay() !== 0) {
+  $('#divSchema .barName').text('Lägg till fler scheman här →');
+  $('#divSchema .barName').hide();
+  $('#divSchema .barName').delay(2500).fadeIn().delay(4000).fadeOut();
+  setTimeout( function() {
+    $('#divSchema .barName').hide();
+    $('#divSchema .barName').text('Schema');
+    $('#divSchema .barName').fadeIn();
+  }, 8500);
+}
 
 if (termin == 'Ht') { var lastDay = new Date(today.getYear(), 11, 31) } else { var lastDay = new Date(today.getYear(), 5, 31) };
-
 
 //WEEK
 function setWeek() {
