@@ -218,13 +218,13 @@ if (today.getDay() == 6 || today.getDay() == 0) {
   $('#divSchema .barName').delay(2500).fadeIn().delay(2000).fadeOut();
   setTimeout( function() {
     $('#divSchema .barName').hide();
-    $('#divSchema .barName').text('Visar nästa veckas schema');
+    $('#divSchema .barName').text('Nästa veckas schema');
     $('#divSchema .barName').fadeIn();
   }, 6000);
 }
 
 if(localStorage.length < 4 && today.getDay() !== 6 && today.getDay() !== 0) {
-  $('#divSchema .barName').text('Lägg till fler scheman här →');
+  $('#divSchema .barName').text('Lägg till fler scheman →');
   $('#divSchema .barName').hide();
   $('#divSchema .barName').delay(2500).fadeIn().delay(4000).fadeOut();
   setTimeout( function() {
