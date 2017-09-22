@@ -212,7 +212,6 @@ var iframeWeek = today.getWeek();
 if (today.getDay() == 6 || today.getDay() == 0) {
   //initial slide blir således måndag
   todayDay = 1;
-  iframeWeek = iframeWeek + 1;
   $('#divSchema .barName').text('Trevlig helg /TH');
   $('#divSchema .barName').hide();
   $('#divSchema .barName').delay(2500).fadeIn().delay(2000).fadeOut();
@@ -272,6 +271,7 @@ function modalRestart() {
     // $.when($.ajax(modalRestart())).then(scheduleWNewW());
     scheduleWNewW();
     $('.weekModal').slideUp(200);
+    $('#weekArrow').css('color', 'white');
   })
 }
 modalRestart();
