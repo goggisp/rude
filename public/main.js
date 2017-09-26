@@ -106,6 +106,8 @@ function getInfo() {
         $.when($.ajax(setWeek())).then(modalRestart());
 
         addRemoveBtn();
+        gold();
+
       } else {
         $('#welcome').text('Hittade inte ditt schema :-( Kolla stavning och internetanslutning! OBS: Skriv ut ev. flera efternamn & accenter.').css({'color': 'red', 'font-size': '16px'});
       }
@@ -190,6 +192,7 @@ function addRemoveBtn() {
       location.reload();
     } else {
       $('.barLi').find('p').css('color', 'grey');
+      $('.gold').find('p').css('color', '#D4AF37');
       $('#1barLi').find('p').css('color', 'red');
     }
   })
@@ -214,23 +217,23 @@ if (today.getDay() == 6 || today.getDay() == 0) {
   todayDay = 1;
   $('#divSchema .barName').text('Trevlig helg /TH');
   $('#divSchema .barName').hide();
-  $('#divSchema .barName').delay(2500).fadeIn().delay(2000).fadeOut();
+  $('#divSchema .barName').delay(1500).fadeIn().delay(2000).fadeOut();
   setTimeout( function() {
     $('#divSchema .barName').hide();
     $('#divSchema .barName').text('Nästa veckas schema');
     $('#divSchema .barName').fadeIn();
-  }, 6000);
+  }, 4500);
 }
 
 if(localStorage.length < 4 && today.getDay() !== 6 && today.getDay() !== 0) {
   $('#divSchema .barName').text('Lägg till fler scheman →');
   $('#divSchema .barName').hide();
-  $('#divSchema .barName').delay(2500).fadeIn().delay(4000).fadeOut();
+  $('#divSchema .barName').delay(1500).fadeIn().delay(2000).fadeOut();
   setTimeout( function() {
     $('#divSchema .barName').hide();
     $('#divSchema .barName').text('Schema');
     $('#divSchema .barName').fadeIn();
-  }, 8500);
+  }, 4500);
 }
 
 if (termin == 'Ht') { var lastDay = new Date(today.getYear(), 11, 31) } else { var lastDay = new Date(today.getYear(), 5, 31) };
@@ -272,8 +275,25 @@ function modalRestart() {
     scheduleWNewW();
     $('.weekModal').slideUp(200);
     $('#weekArrow').css('color', 'white');
-  })
+
+if(week !== iframeWeek) {
+      $('#timeLine, #timeBall, #timeStamp').hide();
+      $('#divSchema .barName').hide();
+      $('#divSchema .barName').text('Schema för vecka ' + week);
+      $('#divSchema .barName').delay(500).fadeIn();
+    }
+    //eftersom att världen är konstig funkar bara det här (21:06 21 sep 2017)
+    if(week == iframeWeek) {
+      showTime();
+       if (today.getDay() == 6 || today.getDay() == 0) {
+        $('#divSchema .barName').text('Nästa veckas schema');
+      } else {
+        $('#divSchema .barName').text('Schema');
+      }
+    }
+ })
 }
+
 modalRestart();
 
 function scheduleWNewW() {
@@ -397,7 +417,7 @@ function addSchedule() {
         if($('.barLi').length < 2) {
           $('#1barLi').css('color', 'grey');
         } else {
-          $('#' + localStorage.key(currentId)+'barLi').find('p').css('color', 'red');
+          //$('#' + localStorage.key(currentId)+'barLi').find('p').css('color', 'red');
         }
 
 	$('#divSchema .barName').text('Schema');
@@ -405,6 +425,8 @@ function addSchedule() {
         restart();
         setWeek();
         addRemoveBtn();
+        gold();
+
       } else {
         // $('#welcome').text('Hittade inte ditt schema :-( Kolla stavning och internetanslutning! OBS: Skriv ut ev. flera efternamn & accenter.').css({'color': 'red', 'font-size': '16px'});
         alert('Hittade inte ditt schema :-( Kolla stavning och internetanslutning! OBS: Skriv ut ev. flera efternamn & accenter.');
@@ -454,6 +476,7 @@ function restart() {
     //   console.log('showing new iframe');
     // }
     $(this).siblings().find('p').css('color', 'grey');
+    $('.gold').find('p').css('color', '#D4AF37');
     $(this).find('p').css('color', 'red');
   });
 };
@@ -474,6 +497,7 @@ function reloadIframes() {
     $('#swiper-wrapper').append(iframeSchema);
   j++;
   }
+  showTime();
   reloadSwipe();
 }
 
@@ -536,4 +560,63 @@ $(window).bind('resizeEnd', function() {
     orgWArr.push($('body').width());
     location.reload();
   }
+  showTime();
 });
+
+function showTime() {
+  if(today.getHours() > 7 && today.getHours() < 17 && today.getDay() < 6 && today.getDay() > 0) {
+
+    if(today.getMinutes() < 10) {
+      var todayMinutes = '0' + today.getMinutes();
+      var todayHours = today.getHours();
+    } else if (today.getHours() < 10) {
+      var todayMinutes = today.getMinutes();
+      var todayHours = '0' + today.getHours();
+    } else if (today.getMinutes() < 10 && today.getHours() < 10) {
+      var todayMinutes = '0' + today.getMinutes();
+      var todayHours = '0' + today.getHours();
+    } else {
+      var todayMinutes = today.getMinutes();
+      var todayHours = today.getHours();
+    }
+
+    $('.swiper-slide:nth-child('+todayDay+')').append('<div id="timeBall"></div><div id="timeStamp">'+todayHours+':'+todayMinutes+'</div><div id="timeLine"></div>');
+    var bottom = 151.25 + (9/408) * ($('body').height() - 165);
+    var Hour = ((462.5-160.25)/7/408) * ($('body').height() - 165);
+    var hours = (17 - today.getHours())*Hour;
+    var minutes = (today.getMinutes()/59) * Hour;
+    var place = hours - minutes + bottom;
+    $('#timeLine, #timeBall, #timeStamp').css('bottom', ''+place+'px');
+    $('#timeLine, #timeBall, #timeStamp').hide();
+    $('#timeLine, #timeBall').delay(1000).fadeIn();
+    $('#timeStamp').delay(2000).fadeIn().delay(2000).fadeOut();
+
+    setTimeout(function() {
+      location.reload();
+    }, 60000);
+  }
+}
+
+var goldPersonList = ['Thim Högberg', 'Joseph Wokil', 'Tobias Simrén', 'Linus Löfgren'];
+
+function gold() {
+  var goldArr = [];
+  var goldPeople = [];
+  for (var i = 0; i < localStorage.length; i++) {
+    if(localStorage.key(i).substring(0,4) == 'name') {
+      goldArr.push(localStorage.key(i));
+    }
+  }
+  for (var i = 1; i <= goldArr.length; i++) {
+    goldPeople.push(localStorage.getItem('name' + i));
+  }
+
+  var goldN = goldPeople.indexOf(goldPersonList[0]) + 1;
+
+  for (var i = 0; i < goldPersonList.length; i++) {
+    $('#' + (goldPeople.indexOf(goldPersonList[i]) + 1) + 'barLi').addClass('gold');
+    $('#' + (goldPeople.indexOf(goldPersonList[i]) + 1) + 'schemanLi').addClass('goldListItem');
+  }
+  $('.gold').css('color', '#D4AF37');
+  $('.goldListItem').css('border-left', '2px solid #D4AF37');
+}

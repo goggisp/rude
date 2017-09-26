@@ -64,6 +64,7 @@ input {
   background-color: #b3b3b3;
   z-index: 1000000;
   overflow: auto;
+   -webkit-overflow-scrolling: touch;
   box-shadow: 3px 3px 5px rgba(44,62,80,0.15);
 }
 
@@ -272,6 +273,7 @@ svg {
 
 #creator {
   position: absolute;
+  margin-top: 10px;
   left: 0px;
   bottom: 0px;
   width: 100%;
@@ -417,4 +419,40 @@ svg {
 .swiper-containerSchema .swiper-pagination-bullet-active  {
   border-bottom: 2.5px solid red;
   color: red;
+}
+
+#timeLine {
+  height: 2px;
+  line-height: 2px;
+  overflow: hidden;
+  font-size: 0.1px;
+  width: calc(100% - 1px);
+  background-color: red;
+  position: absolute;
+  z-index: 10;
+  /*bottom: 462.5px;*/
+  bottom: 151.25px;
+  /*top: 81px;*/
+  /*129.75*/
+}
+
+#timeBall {
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-left: 10px solid red;
+  border-bottom: 5px solid transparent;
+  position: absolute;
+  z-index: 10;
+  margin-left: -8px;
+  margin-bottom: -4px;
+}
+
+#timeStamp {
+  position: relative;
+  margin-top: -22.5px;
+  color: red;
+  font-weight: bold;
+  left: 5px;
+  font-size: 14px;
 }
