@@ -106,6 +106,8 @@ function getInfo() {
         $.when($.ajax(setWeek())).then(modalRestart());
 
         addRemoveBtn();
+        setColor();
+
         gold();
         meSign();
       } else {
@@ -194,6 +196,7 @@ function addRemoveBtn() {
     }
     if(whichId == 1) {
       meSign();
+      localStorage.removeItem('color');
     }
   })
 }
@@ -429,12 +432,17 @@ $('#changeColor').click(function() {
 
 $('#colorInput').keypress(function(e) {
     if(e.which == 13) {
-      alert('Denna eminenta funktion är fortfarande under beta, fyi')
       var color = $('#colorInput').val();
-      $('.barTop').css('background-color', color);
       $('#colorInput').val('');
+      localStorage.setItem('color', color);
+      setColor();
     }
 });
+
+function setColor() {
+  var color = localStorage.getItem('color');
+  $('.barTop').css('background-color', color);
+}
 
 function restart() {
   $('.barLi').on('click', function() {
