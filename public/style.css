@@ -456,3 +456,11 @@ svg {
   left: 5px;
   font-size: 14px;
 }
+
+.goldMemberSign {
+  display: none;
+}
+
+.meSign {
+  display: none;
+}

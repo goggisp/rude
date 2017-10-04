@@ -86,7 +86,7 @@ function getInfo() {
           var name = localStorage.getItem('name'+i);
           var lastName = name.substr(name.indexOf(' ')+1);
           $('.barUl').append('<li class="barLi" id="'+i+'barLi"><p>' + name.substr(0,1) + lastName.substr(0,1) + '</p></li>');
-          $('#schemanUl').append('<li class="schemanLi" id="'+i+'schemanLi">'+name+'</li>');
+          $('#schemanUl').append('<li class="schemanLi" id="'+i+'schemanLi">'+name+'<span class="meSign">&nbsp;JAG</span><span class="goldMemberSign">&nbsp;GOLD MEMBER</span></li>');
         }
 
         if (nameArr.length > 1) {
@@ -107,7 +107,7 @@ function getInfo() {
 
         addRemoveBtn();
         gold();
-
+        meSign();
       } else {
         $('#welcome').text('Hittade inte ditt schema :-( Kolla stavning och internetanslutning! OBS: Skriv ut ev. flera efternamn & accenter.').css({'color': 'red', 'font-size': '16px'});
       }
@@ -128,7 +128,7 @@ $('#removeScheduleBtn').click(function() {
   $('.removeSchedule').slideToggle(200);
 })
 
-//TA BORT schema TILLFÄLLIG PLATS
+//TA BORT schema
 function addRemoveBtn() {
   $('.schemanLi').find('.removeSchedule').remove();
   $('.schemanLi').append('<svg class="removeSchedule" version="1.1" xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"> <g id="icomoon-ignore"> </g> <path d="M64 160v320c0 17.6 14.4 32 32 32h288c17.6 0 32-14.4 32-32v-320h-352zM160 448h-32v-224h32v224zM224 448h-32v-224h32v224zM288 448h-32v-224h32v224zM352 448h-32v-224h32v224z"></path> <path d="M424 64h-104v-40c0-13.2-10.8-24-24-24h-112c-13.2 0-24 10.8-24 24v40h-104c-13.2 0-24 10.8-24 24v40h416v-40c0-13.2-10.8-24-24-24zM288 64h-96v-31.599h96v31.599z"></path> </svg> ');
@@ -174,15 +174,12 @@ function addRemoveBtn() {
             $(this).attr('src', $(this).attr('src').replace(currentId, localStorage.getItem('1')));
         })
         restart();
-        console.log('ny current');
       }
     }
 
     $(this).parent().remove();
     $('#'+whichId+'barLi').remove();
     nameArr.length = 0;
-    // localStorage.removeItem(whichId);
-    // localStorage.removeItem('name'+whichId);
     $.when($.ajax()).then(setWeek());
 
     if($('.barLi').length < 2) {
@@ -195,9 +192,11 @@ function addRemoveBtn() {
       $('.gold').find('p').css('color', '#D4AF37');
       $('#1barLi').find('p').css('color', 'red');
     }
+    if(whichId == 1) {
+      meSign();
+    }
   })
 }
-
 
 var today = new Date();
 var todayDay = today.getDay();
@@ -258,20 +257,16 @@ function appendWeeks() {
 
 function modalRestart() {
   $('.weekModalLi').click(function() {
-    // $('.swiper-pagination').css('z-index', '0');
     $('.iframeSchema').fadeOut(100);
     var week = this.id;
 
     $('.iframeSchema').each(function() {
-      // NOTE: var week
-      // $(this).attr('src', $(this).attr('src').replace($(this).attr('src').substring($(this).attr('src').indexOf('week=')+5, $(this).attr('src').indexOf('&foot')), week));
       var iframeUrl = $(this).attr('src');
       var weekEW = iframeUrl.substring(iframeUrl.indexOf('week='), iframeUrl.indexOf('&foot'));
       $(this).attr('src', iframeUrl.replace(weekEW, 'week='+week));
       console.log('changed week of iframes');
     });
     setWeek();
-    // $.when($.ajax(modalRestart())).then(scheduleWNewW());
     scheduleWNewW();
     $('.weekModal').slideUp(200);
     $('#weekArrow').css('color', 'white');
@@ -352,13 +347,10 @@ function addSchedule() {
   var lastName = $('#schemeInputLast').val();
 
   if (firstName == '' && lastName == '') {
-    // $('#welcome').text('Du glömde för och efternamn!').css('color', 'red');
     alert('Du glömde för och efternamn!');
   } else if (firstName == '') {
-    // $('#welcome').text('Du glömde förnamn!!!1!').css('color', 'red');
     alert('Du glömde förnamn!1!');
   } else if (lastName == '') {
-    // $('#welcome').text('Du glömde efternamn!').css('color', 'red');
     alert('Du glömde efternamn!');
   } else {
     firstName = firstName.substr(0,1).toUpperCase()+firstName.substr(1);
@@ -400,12 +392,10 @@ function addSchedule() {
         $('#schemeInputFirst').val('');
         $('#schemeInputLast').val('');
 
-        // localStorage.setItem('current', requestedId);
         var n = $('.barLi').length + 1;
 
-        $('#schemanUl').append('<li class="schemanLi" id="'+n+'schemanLi">'+originalFirstName+' '+originalLastName+'</li>');
+        $('#schemanUl').append('<li class="schemanLi" id="'+n+'schemanLi">'+originalFirstName+' '+originalLastName+'<span class="meSign">&nbsp;JAG</span><span class="goldMemberSign">&nbsp;GOLD MEMBER</span></li>');
 
-        // $('#schemanUl').append('<li class="schemanLi">'+id+'</li>');
         $('.barUl').append( '<li class="barLi" id="'+n+'barLi"><p>'+
                             originalFirstName.substr(0,1) + originalLastName.substr(0,1) +
                             '</p></li>');
@@ -416,8 +406,6 @@ function addSchedule() {
 
         if($('.barLi').length < 2) {
           $('#1barLi').css('color', 'grey');
-        } else {
-          //$('#' + localStorage.key(currentId)+'barLi').find('p').css('color', 'red');
         }
 
 	$('#divSchema .barName').text('Schema');
@@ -428,7 +416,6 @@ function addSchedule() {
         gold();
 
       } else {
-        // $('#welcome').text('Hittade inte ditt schema :-( Kolla stavning och internetanslutning! OBS: Skriv ut ev. flera efternamn & accenter.').css({'color': 'red', 'font-size': '16px'});
         alert('Hittade inte ditt schema :-( Kolla stavning och internetanslutning! OBS: Skriv ut ev. flera efternamn & accenter.');
       }
     });
@@ -449,32 +436,19 @@ $('#colorInput').keypress(function(e) {
     }
 });
 
-
 function restart() {
   $('.barLi').on('click', function() {
-    // $('.iframeSchema').slideUp(50);
-    // $('.iframeSchema').fadeOut(100);
     var barLiId = this.id.substr(0,1);
-    // console.log('You clicked no' + barLiId);
     var id = localStorage.getItem(barLiId);
     var currentId = localStorage.getItem('current');
-    // console.log(id);
     localStorage.setItem('current', id);
-
-    // $.when($.ajax(changeEachId())).then(changeSchedule());
-    // $.when($.ajax(reloadIframes())).then(changeSchedule());
 
     function changeEachId() {
       $('.iframeSchema').each(function() {
         $(this).attr('src', $(this).attr('src').replace(currentId, id));
-        // $('.iframeSchema').fadeIn(100);
       });
     }
     changeEachId();
-    // function changeSchedule() {
-    //   $('.iframeSchema').delay(200).slideToggle();
-    //   console.log('showing new iframe');
-    // }
     $(this).siblings().find('p').css('color', 'grey');
     $('.gold').find('p').css('color', '#D4AF37');
     $(this).find('p').css('color', 'red');
@@ -501,10 +475,6 @@ function reloadIframes() {
   reloadSwipe();
 }
 
-//swiper.js
-// $(document).ready(function () {
-//
-// });
 var dayArr = ['Mån', 'Tis', 'Ons', 'Tor', 'Fre'];
 
 function reloadSwipe() {
@@ -514,7 +484,7 @@ function reloadSwipe() {
     grabCursor: true,
     width: $('body').width(),
     spaceBetween: 10,
-    initialSlide: todayDay - 1, //va händer om det är lördag då, ingen vet
+    initialSlide: todayDay - 1,
     pagination: '.swiper-pagination',
     paginationClickable: true,
     paginationBulletRender: function (swiper, index, className) {
@@ -541,18 +511,9 @@ $(window).bind('resizeEnd', function() {
   var imgWidth = $('body').width()-20;
   var heightLength = (imgHeight.toString().length + 8);
 
-  // var source = $('.iframeSchema').attr('src');
-  // console.log(source.length);
-  // var widthBeg = (source.indexOf('width=')+6);
-  // var widthEnd = (source.length - heightLength);
-  // console.log('widthbeg'+widthBeg);
-  // console.log('widthe'+widthEnd);
-  // console.log(source.substring(175, widthEnd));
-  //
   if(orgWArr[orgWArr.length - 1] == (imgWidth+20)) {
     $('.iframeSchema').each(function() {
       $(this).attr('src', $(this).attr('src').replace( $(this).attr('src').substring($(this).attr('src').indexOf('height=')+7, $(this).attr('src').length), imgHeight));
-      // $(this).attr('src', $(this).attr('src').replace($(this).attr('src').substring($(this).attr('src').indexOf('width=')+6, $(this).attr('src').length - heightLength), imgWidth));
     })
     orgWArr.length = 0;
   } else {
@@ -597,7 +558,7 @@ function showTime() {
   }
 }
 
-var goldPersonList = ['Thim Högberg', 'Joseph Wokil', 'Tobias Simrén', 'Linus Löfgren'];
+var goldPersonList = ['Joseph Wokil', 'Tobias Simrén', 'Linus Löfgren', 'Karl Bäck', 'Oscar Dunnington', 'Sara Edebo', 'Peter Stahre'];
 
 function gold() {
   var goldArr = [];
@@ -616,7 +577,15 @@ function gold() {
   for (var i = 0; i < goldPersonList.length; i++) {
     $('#' + (goldPeople.indexOf(goldPersonList[i]) + 1) + 'barLi').addClass('gold');
     $('#' + (goldPeople.indexOf(goldPersonList[i]) + 1) + 'schemanLi').addClass('goldListItem');
+    $('#' + (goldPeople.indexOf(goldPersonList[i]) + 1) + 'schemanLi').find('.goldMemberSign').show();
   }
   $('.gold').css('color', '#D4AF37');
   $('.goldListItem').css('border-left', '2px solid #D4AF37');
+  $('.goldMemberSign').css({'color': '#D4AF37', 'font-size': '12px', 'font-weight': 'bold'});
+}
+
+function meSign() {
+  $('.schemanLi .meSign').first().show();
+  $('.meSign').css({'color': 'red', 'font-size': '12px', 'font-weight': 'bold'})
+  console.log('mesign');
 }
