@@ -426,7 +426,6 @@ function addSchedule() {
 }
 
 $('#changeColor').click(function() {
-  $('#colorInput').focus();
   $('#colorInput').slideToggle(150);
 })
 
@@ -562,7 +561,7 @@ function showTime() {
 
     setTimeout(function() {
       location.reload();
-    }, 60000);
+    },5*60000);
   }
 }
 
