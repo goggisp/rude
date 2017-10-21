@@ -111,7 +111,7 @@ function getInfo() {
         gold();
         meSign();
       } else {
-        $('#welcome').text('Hittade inte ditt schema :-( Kolla stavning och internetanslutning! OBS: Skriv ut ev. flera efternamn & accenter.').css({'color': 'red', 'font-size': '16px'});
+        $('#welcome').text('Hittade inte ditt schema :-( Kolla stavning och internetanslutning! OBS: Skriv ut ev. flera efternamn & áccéntér.').css({'color': 'red', 'font-size': '16px'});
       }
     });
   }
@@ -332,6 +332,7 @@ $('#goBack').click(function() {
 $('#addSchedule').click(function() {
   $('#addScheduleModal').slideToggle(150);
   $('#schemeInputFirst').focus();
+  $('#creator').slideToggle();
 })
 
 $('#scheduleModalBtn').click(function() {
@@ -341,6 +342,14 @@ $('#scheduleModalBtn').click(function() {
 $('#schemeInputLast').keypress(function(e) {
   if(e.which == 13) {
     addSchedule();
+  }
+});
+
+$('#capitalizeCheckbox').change(function() {
+  if($('#capitalizeCheckbox').is(':checked')) {
+    $('#addScheduleModal input').css('text-transform', 'none');
+  } else {
+    $('#addScheduleModal input').css('text-transform', 'capitalize');
   }
 });
 
@@ -356,8 +365,11 @@ function addSchedule() {
   } else if (lastName == '') {
     alert('Du glömde efternamn!');
   } else {
-    firstName = firstName.substr(0,1).toUpperCase()+firstName.substr(1);
-    lastName = lastName.substr(0,1).toUpperCase()+lastName.substr(1);
+
+    if ($('#capitalizeCheckbox').is(':checked') == false) {
+      firstName = firstName.substr(0,1).toUpperCase()+firstName.substr(1);
+      lastName = lastName.substr(0,1).toUpperCase()+lastName.substr(1);
+    }
 
     var originalFirstName = firstName;
     var originalLastName = lastName;
@@ -407,8 +419,8 @@ function addSchedule() {
 
         var currentId = localStorage.getItem('current');
 
-        if($('.barLi').length < 2) {
-          $('#1barLi').css('color', 'grey');
+        if(n < 3) {
+          $('#1barLi p').css('color', 'red');
         }
 
 	$('#divSchema .barName').text('Schema');
@@ -419,7 +431,7 @@ function addSchedule() {
         gold();
 
       } else {
-        alert('Hittade inte ditt schema :-( Kolla stavning och internetanslutning! OBS: Skriv ut ev. flera efternamn & accenter.');
+        alert('Hittade inte ditt schema :-( Kolla stavning och internetanslutning! OBS: Skriv ut ev. flera efternamn & áccéntér.');
       }
     });
   }
@@ -427,6 +439,7 @@ function addSchedule() {
 
 $('#changeColor').click(function() {
   $('#colorInput').slideToggle(150);
+  $('#creator').slideToggle();
 })
 
 $('#colorInput').keypress(function(e) {
@@ -565,7 +578,7 @@ function showTime() {
   }
 }
 
-var goldPersonList = ['Joseph Wokil', 'Tobias Simrén', 'Linus Löfgren', 'Karl Bäck', 'Oscar Dunnington', 'Sara Edebo', 'Peter Stahre'];
+var goldPersonList = ['Joseph Wokil', 'Tobias Simrén', 'Linus von Ekensteen Löfgren', 'Karl Bäck', 'Oscar Dunnington', 'Peter Stahre', 'Jacob Welander'];
 
 function gold() {
   var goldArr = [];
@@ -594,5 +607,4 @@ function gold() {
 function meSign() {
   $('.schemanLi .meSign').first().show();
   $('.meSign').css({'color': 'red', 'font-size': '12px', 'font-weight': 'bold'})
-  console.log('mesign');
 }

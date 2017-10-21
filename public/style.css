@@ -208,7 +208,19 @@ svg {
 #scheduleModalBtn {
   width: 150px;
   height: 29px;
-  margin-top: 5px;
+  margin-top: 10px;
+  margin-bottom: -40px;
+}
+
+#capitalizeCheckbox {
+  left: calc(100% - 130px);
+  position: relative;
+}
+
+#capitalize {
+  margin-left: 20px;
+  margin-top: -26px;
+  float: right;
 }
 
 #changeColor {
@@ -285,6 +297,10 @@ svg {
   align-items: center;
 }
 
+#creator a {
+  color: inherit;
+  text-decoration: underline;
+}
 
 /*INTRO*/
 #intro {
