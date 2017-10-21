@@ -99,7 +99,6 @@ function getInfo() {
           console.log('Y u max the submit btn?');
         }
 
-
         //reloadiframes först eftersom resten hämtar från DOM
         reloadIframes();
         $.when($.ajax(appendWeeks())).then(setWeek());
@@ -203,7 +202,6 @@ function addRemoveBtn() {
 
 var today = new Date();
 var todayDay = today.getDay();
-
 
 if (today.getMonth()>6) {var termin='Ht'} else {termin='Vt'};
 
@@ -348,8 +346,12 @@ $('#schemeInputLast').keypress(function(e) {
 $('#capitalizeCheckbox').change(function() {
   if($('#capitalizeCheckbox').is(':checked')) {
     $('#addScheduleModal input').css('text-transform', 'none');
+    $('#schemeInputFirst').attr('placeholder', 'förnamn');
+    $('#schemeInputLast').attr('placeholder', 'efternamn');
+    $('#schemeInputFirst').focus();
   } else {
     $('#addScheduleModal input').css('text-transform', 'capitalize');
+    $('#schemeInputFirst').focus();
   }
 });
 

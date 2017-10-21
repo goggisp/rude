@@ -212,15 +212,40 @@ svg {
   margin-bottom: -40px;
 }
 
-#capitalizeCheckbox {
-  left: calc(100% - 130px);
+.checkBoxDiv {
+  width: 20px;
+  height: 20px;
+  background: #ddd;
+  margin: 20px 0 0 0;
   position: relative;
+  left: calc(100% - 140px);
+}
+
+.checkBoxDiv label {
+  display: block;
+  width: 12.5px;
+  height: 12.5px;
+  cursor: pointer;
+  position: absolute;
+  top: 3.75px;
+  left: 3.75px;
+  z-index: 1;
+  background: #ddd;
+  transition: all .25s ease;
+}
+
+.checkBoxDiv input[type=checkbox]:checked + label {
+  background: red;
+}
+
+input[type=checkbox] {
+  visibility: hidden;
 }
 
 #capitalize {
-  margin-left: 20px;
-  margin-top: -26px;
-  float: right;
+  position: relative;
+  top: -42px;
+  right: -25px;
 }
 
 #changeColor {
