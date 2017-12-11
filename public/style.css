@@ -60,7 +60,7 @@ input {
   left: 55px;
   min-height: 50px;
   max-height: calc(100% - 130px);
-  width: 200px;
+  max- width: 200px;
   background-color: #b3b3b3;
   z-index: 1000000;
   overflow: auto;
@@ -219,6 +219,7 @@ svg {
   margin: 20px 0 0 0;
   position: relative;
   left: calc(100% - 140px);
+  top: -5px;	
 }
 
 .checkBoxDiv label {
@@ -244,7 +245,7 @@ input[type=checkbox] {
 
 #capitalize {
   position: relative;
-  top: -42px;
+  top: -42.5px;
   right: -25px;
 }
 

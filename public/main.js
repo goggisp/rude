@@ -325,6 +325,7 @@ $('#goBack').click(function() {
   $('#colorInput').slideUp();
   $('.removeSchedule').slideUp();
   $('#divSchema').slideToggle();
+  $('#creator').slideDown();
 })
 
 $('#addSchedule').click(function() {
