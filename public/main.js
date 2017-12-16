@@ -313,6 +313,11 @@ $('.weekBtn').click(function() {
   $('.weekModal').slideToggle(200);
 })
 
+$('#reloadBtn').click(function() {
+  $('#divSchema .barName').text('Laddar om...');
+  location.reload();
+})
+
 //settings
 $('.settingsBtn').click(function() {
   $('#settings').slideToggle();
@@ -572,12 +577,12 @@ function showTime() {
     var place = hours - minutes + bottom;
     $('#timeLine, #timeBall, #timeStamp').css('bottom', ''+place+'px');
     $('#timeLine, #timeBall, #timeStamp').hide();
-    $('#timeLine, #timeBall').delay(1000).fadeIn();
-    $('#timeStamp').delay(2000).fadeIn().delay(2000).fadeOut();
+    $('#timeLine, #timeBall').delay(1000).fadeIn().delay(4000).fadeOut();
+    $('#timeStamp').delay(1500).fadeIn().delay(3000).fadeOut();
 
-    setTimeout(function() {
+    /*setTimeout(function() {
       location.reload();
-    },5*60000);
+    },5*60000);*/
   }
 }
 
