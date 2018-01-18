@@ -215,7 +215,7 @@ var iframeWeek = today.getWeek();
 if (today.getDay() == 6 || today.getDay() == 0) {
   //initial slide blir således måndag
   todayDay = 1;
-  $('#divSchema .barName').text('Trevlig helg /TH');
+  $('#divSchema .barName').text('HELG HELG HELG');
   $('#divSchema .barName').hide();
   $('#divSchema .barName').delay(1500).fadeIn().delay(2000).fadeOut();
   setTimeout( function() {
@@ -586,7 +586,7 @@ function showTime() {
   }
 }
 
-var goldPersonList = ['Joseph Wokil', 'Tobias Simrén', 'Linus von Ekensteen Löfgren', 'Karl Bäck', 'Oscar Dunnington', 'Peter Stahre', 'Jacob Welander'];
+var goldPersonList = ['Joseph Wokil', 'Peter Stahre', 'Oscar Dunnington', 'Emelie Hitzeroth'];
 
 function gold() {
   var goldArr = [];
@@ -616,3 +616,5 @@ function meSign() {
   $('.schemanLi .meSign').first().show();
   $('.meSign').css({'color': 'red', 'font-size': '12px', 'font-weight': 'bold'})
 }
+
+//gillar du min kod?
