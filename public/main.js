@@ -1,7 +1,7 @@
 //intro
 $('#divSchema').hide();
 $('#intro').show();
-// $('#settings').show();
+
 if(localStorage.getItem('name1') !== null) {
   $('#firstInput').val(localStorage.getItem('name1').substr(0, localStorage.getItem('name1').indexOf(' ')));
   $('#lastInput').val(localStorage.getItem('name1').substr(localStorage.getItem('name1').indexOf(' ')+1));
@@ -618,3 +618,12 @@ function meSign() {
 }
 
 //gillar du min kod?
+
+$('#blogg').hide();
+if(localStorage.length <= 1) {
+  $('#firstInput').val('Thim');
+  $('#lastInput').val('Högberg');
+  getInfo();
+
+  $('#blogg').show();
+}
