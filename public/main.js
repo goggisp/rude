@@ -496,7 +496,7 @@ function reloadIframes() {
   var j = 0;
   for (var i = 1; i <= 16; i*=2) {
     var iframeSchema = '<div class="swiper-slide"><iframe id="d' + days[j] + '1" src="http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=93700/sv-se&type=3&id={'+id+'}&period='+termin+'&week='+iframeWeek+'&foot=0&day='+i+'&width='+imgWidth+'&height='+imgHeight+'" class="iframeSchema"></iframe></div>';
-    $('#swiper-wrapper').append(iframeSchema);
+    $('#swiper-wrapperVerticalSchema').append(iframeSchema);
   j++;
   }
   showTime();
@@ -508,7 +508,7 @@ var dayArr = ['Mån', 'Tis', 'Ons', 'Tor', 'Fre'];
 function reloadSwipe() {
   $('.swiper-containerSchema').height($('body').height());
   //initialize swiper when document ready
-  var schemaSwiper = new Swiper ('.swiper-containerSchema', {
+  var schemaSwiper = new Swiper ('.swiper-containerVerticalSchema', {
     grabCursor: true,
     width: $('body').width(),
     spaceBetween: 10,
@@ -519,6 +519,13 @@ function reloadSwipe() {
     return '<span class="' + className + '">' + dayArr[index] + '</span>';
     },
   })
+
+  var swiperH = new Swiper('.swiper-containerSchema', {
+    grabCursor: true,
+    direction: 'vertical',
+    height: $('body').height() * 2/3,
+    spaceBetween: 10,
+    });
 }
 
 var orgWArr = [];
@@ -619,11 +626,11 @@ function meSign() {
 
 //gillar du min kod?
 
+// NOTE:
 $('#blogg').hide();
 if(localStorage.length <= 1) {
   $('#firstInput').val('Thim');
   $('#lastInput').val('Högberg');
   getInfo();
-
   $('#blogg').show();
 }

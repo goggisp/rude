@@ -176,7 +176,6 @@ svg {
   /*-webkit-overflow-scrolling: touch;*/
   font-size: 16px;
   overflow: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 .scheman p {
@@ -227,7 +226,7 @@ svg {
   margin: 20px 0 0 0;
   position: relative;
   left: calc(100% - 140px);
-  top: -5px;	
+  top: -5px;
 }
 
 .checkBoxDiv label {
@@ -318,7 +317,8 @@ input[type=checkbox] {
 }
 
 #creator {
-  position: fixed;
+  position: absolute;
+  margin-top: 10px;
   left: 0px;
   bottom: 0px;
   width: 100%;
@@ -326,8 +326,8 @@ input[type=checkbox] {
   color: #bfbfbf;
   display: flex;
   justify-content: space-around;
-  margin-bottom: 30px;
-  align-items: flex-end;
+  margin-bottom: 5px;
+  align-items: center;
 }
 
 #creator a {
@@ -460,7 +460,7 @@ input[type=checkbox] {
 .swiper-containerSchema .swiper-pagination  {
   position: fixed;
   width: 100%;
-  top: 70px;
+  top: -20px;
   margin-bottom: 50px;
   z-index:2;
 }
@@ -469,6 +469,18 @@ input[type=checkbox] {
   border-bottom: 2.5px solid red;
   color: red;
 }
+/*nytt*/
+.swiper-container {
+  width: 100%;
+  height:100%;
+}
+
+#swiper-slideMat {
+   position: relative;
+   top: 20px;
+}
+
+/*ovan nytt*/
 
 #timeLine {
   height: 2px;
@@ -513,3 +525,4 @@ input[type=checkbox] {
 .meSign {
   display: none;
 }
+
