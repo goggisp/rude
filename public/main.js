@@ -523,8 +523,8 @@ function reloadSwipe() {
   var swiperH = new Swiper('.swiper-containerSchema', {
     grabCursor: true,
     direction: 'vertical',
-    height: $('body').height() * 2/3,
-    spaceBetween: 10,
+    height: $('body').height(),
+   // spaceBetween: 10,
     });
 }
 

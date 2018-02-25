@@ -30,7 +30,6 @@ input {
 
 .barName {
   width: 100%;
-  height: 100%;
   position: absolute;
   top: 20px;
   font-size: 20px;
@@ -428,8 +427,10 @@ input[type=checkbox] {
 
 .swiper-containerSchema {
   width: 100%;
-  margin: 80px 0 100px;
-  padding: 10px;
+  height: 100%;
+  position: absolute;
+  margin: 60px 0 100px;
+  padding: 20px 10px 10px 10px;
 }
 
 .swiper-containerSchema .swiper-wrapper {
@@ -460,7 +461,7 @@ input[type=checkbox] {
 .swiper-containerSchema .swiper-pagination  {
   position: fixed;
   width: 100%;
-  top: -20px;
+  top: -10px;  
   margin-bottom: 50px;
   z-index:2;
 }
@@ -473,6 +474,14 @@ input[type=checkbox] {
 .swiper-container {
   width: 100%;
   height:100%;
+}
+
+.swiper-containerVerticalSchema {
+  position: relative;
+  top: -30px;
+  padding-top: 40px;
+  left: -10px;
+  padding-left: 10px;
 }
 
 #swiper-slideMat {
