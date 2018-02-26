@@ -496,14 +496,11 @@ input[type=checkbox] {
   line-height: 2px;
   overflow: hidden;
   font-size: 0.1px;
-  width: calc(100% - 1px);
+  width: calc(100% - 11px);
   background-color: red;
   position: absolute;
   z-index: 10;
-  /*bottom: 462.5px;*/
   bottom: 151.25px;
-  /*top: 81px;*/
-  /*129.75*/
 }
 
 #timeBall {

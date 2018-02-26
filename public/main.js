@@ -41,14 +41,12 @@ function getInfo() {
     lastName = lastName.replace('ä', '&#228;');
     firstName = firstName.replace('ö', '&#246;');
     lastName = lastName.replace('ö', '&#246;');
-
     firstName = firstName.replace('Å', '&#197;');
     lastName = lastName.replace('Å', '&#197;');
     firstName = firstName.replace('Ä', '&#196;');
     lastName = lastName.replace('Ä', '&#196;');
     firstName = firstName.replace('Ö', '&#214;');
     lastName = lastName.replace('Ö', '&#214;');
-
     firstName = firstName.replace('é', '&#233;');
     lastName = lastName.replace('é', '&#233;');
     firstName = firstName.replace('ü', '&#252;');
@@ -71,7 +69,7 @@ function getInfo() {
         localStorage.setItem('1', requestedId);
         localStorage.setItem('current', requestedId);
 
-        //nedan: loggar in automatiskt nästa gång appen startas om eftersom
+        //nedan: loggar in automatiskt nästa gång startas om eftersom
         //name i LS inte kan skapas om inte getInfo() gått igenom
         localStorage.setItem('name1', originalFirstName+' '+originalLastName);
 
@@ -116,17 +114,18 @@ function getInfo() {
   }
 }
 
-if(localStorage.length > 1) {
+//current och googles sparas i ls
+if(localStorage.length > 2) {
   $('#welcome').text('Välkommen tillbaka!');
 }
 
-if (localStorage.length < 2) {
+if (localStorage.length < 3) {
   $('#disclaimer').append('<p>Rudebecks.me är fristående från Rudebecks.se, ingen data är följaktligen hämtad från skolans hemsida.</p>');
   $('#disclaimerCreator').append('<p>Thim Högberg</p> <p>hogberg.thim@gmail.com</p>')
 }
 
 $('#removeScheduleBtn').click(function() {
-  $('.removeSchedule').slideToggle(200);
+  $('.removeSchedule').stop(true).slideToggle(200);
 })
 
 //TA BORT schema
@@ -157,7 +156,7 @@ function addRemoveBtn() {
       for (var i = whichId, l = nameArr.length; i< l; i++) {
         console.log(nameArr.length);
         localStorage.setItem(i, localStorage.getItem(parseInt(i)+1));
-        //kan tydligen inte lägga på i localStorage.getitem()
+
         var iplusone = parseInt(i) + 1;
         localStorage.setItem('name'+i, localStorage.getItem('name' + iplusone));
         localStorage.removeItem(iplusone);
@@ -236,9 +235,9 @@ if(localStorage.length < 4 && today.getDay() !== 6 && today.getDay() !== 0) {
   }, 4500);
 }
 
-if (termin == 'Ht') { var lastDay = new Date(today.getYear(), 11, 31) } else { var lastDay = new Date(today.getYear(), 5, 31) };
+if (termin == 'Ht') { var lastDay = new Date(today.getYear(), 11, 31) } else { var lastDay = new Date(today.getYear(), 5, 24) };
 
-//WEEK
+//vecka
 function setWeek() {
   $('#weekNo').empty();
   var weekNo = $('#dmon1').attr('src').substring($('#dmon1').attr('src').indexOf('week=')+5, $('#dmon1').attr('src').indexOf('&foot'));
@@ -278,7 +277,7 @@ if(week !== iframeWeek) {
       $('#divSchema .barName').text('Schema för vecka ' + week);
       $('#divSchema .barName').delay(500).fadeIn();
     }
-    //eftersom att världen är konstig funkar bara det här (21:06 21 sep 2017)
+
     if(week == iframeWeek) {
       showTime();
        if (today.getDay() == 6 || today.getDay() == 0) {
@@ -310,7 +309,7 @@ $('.weekBtn').click(function() {
       $('#weekArrow').css('color', 'white');
     }, 200);
   }
-  $('.weekModal').slideToggle(200);
+  $('.weekModal').stop(true).slideToggle(200);
 })
 
 $('#reloadBtn').click(function() {
@@ -320,23 +319,23 @@ $('#reloadBtn').click(function() {
 
 //settings
 $('.settingsBtn').click(function() {
-  $('#settings').slideToggle();
-  $('#divSchema').slideToggle();
+  $('#settings').stop(true).slideToggle();
+  $('#divSchema').stop(true).slideToggle();
 })
 
 $('#goBack').click(function() {
-  $('#settings').slideToggle();
+  $('#settings').stop(true).slideToggle();
   $('#addScheduleModal').slideUp();
   $('#colorInput').slideUp();
   $('.removeSchedule').slideUp();
-  $('#divSchema').slideToggle();
+  $('#divSchema').stop(true).slideToggle();
   $('#creator').slideDown();
 })
 
 $('#addSchedule').click(function() {
-  $('#addScheduleModal').slideToggle(150);
+  $('#addScheduleModal').stop(true).slideToggle(150);
   $('#schemeInputFirst').focus();
-  $('#creator').slideToggle();
+  $('#creator').stop(true).slideToggle();
 })
 
 $('#scheduleModalBtn').click(function() {
@@ -446,8 +445,9 @@ function addSchedule() {
 }
 
 $('#changeColor').click(function() {
-  $('#colorInput').slideToggle(150);
-  $('#creator').slideToggle();
+  $('#colorInput').stop(true).slideToggle(150);
+  $('#creator').stop(true).slideToggle();
+  $('#colorInput').focus();
 })
 
 $('#colorInput').keypress(function(e) {
@@ -480,10 +480,11 @@ function restart() {
     $(this).siblings().find('p').css('color', 'grey');
     $('.gold').find('p').css('color', '#D4AF37');
     $(this).find('p').css('color', 'red');
+
+    $('#timeLine, #timeBall').stop(true).fadeIn().delay(2500).fadeOut();
+    $('#timeStamp').stop(true).fadeIn().delay(2500).fadeOut();
   });
 };
-// restart();
-
 
 //schema append
 var days = ['mon','tue','wed','thu','fri'];
@@ -495,7 +496,7 @@ function reloadIframes() {
 
   var j = 0;
   for (var i = 1; i <= 16; i*=2) {
-    var iframeSchema = '<div class="swiper-slide"><iframe id="d' + days[j] + '1" src="http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=93700/sv-se&type=3&id={'+id+'}&period='+termin+'&week='+iframeWeek+'&foot=0&day='+i+'&width='+imgWidth+'&height='+imgHeight+'" class="iframeSchema"></iframe></div>';
+    var iframeSchema = '<div class="swiper-slide swiper-slideSchemaDag"><iframe id="d' + days[j] + '1" src="http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=93700/sv-se&type=3&id={'+id+'}&period='+termin+'&week='+iframeWeek+'&foot=0&day='+i+'&width='+imgWidth+'&height='+imgHeight+'" class="iframeSchema"></iframe></div>';
     $('#swiper-wrapperVerticalSchema').append(iframeSchema);
   j++;
   }
@@ -507,7 +508,6 @@ var dayArr = ['Mån', 'Tis', 'Ons', 'Tor', 'Fre'];
 
 function reloadSwipe() {
   $('.swiper-containerSchema').height($('body').height());
-  //initialize swiper when document ready
   var schemaSwiper = new Swiper ('.swiper-containerVerticalSchema', {
     grabCursor: true,
     width: $('body').width(),
@@ -576,7 +576,7 @@ function showTime() {
       var todayHours = today.getHours();
     }
 
-    $('.swiper-slide:nth-child('+todayDay+')').append('<div id="timeBall"></div><div id="timeStamp">'+todayHours+':'+todayMinutes+'</div><div id="timeLine"></div>');
+    $('.swiper-slideSchemaDag:nth-child('+todayDay+')').append('<div id="timeBall"></div><div id="timeStamp">'+todayHours+':'+todayMinutes+'</div><div id="timeLine"></div>');
     var bottom = 151.25 + (9/408) * ($('body').height() - 165);
     var Hour = ((462.5-160.25)/7/408) * ($('body').height() - 165);
     var hours = (17 - today.getHours())*Hour;
