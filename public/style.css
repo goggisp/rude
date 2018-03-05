@@ -159,6 +159,35 @@ svg {
   fill: grey;
 }
 
+#matDiv {
+  height: calc(100% - 160px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  left: -10px;
+  font-size: 16px;
+
+}
+
+#matUl {
+
+}
+
+#matUl li:first-child {
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.matLi {
+  width: 100%;
+  min-height: 30px;
+  background-color: white;
+  padding: 5px;
+  margin-top: 5px;
+}
 
 /*SETTINGS*/
 #settings {
@@ -171,7 +200,7 @@ svg {
   width: 100%;
   background-color: #edf0f1;
   overflow: none;
-  padding: 70px 10px 10px;
+  padding: 70px 10px 50px;
   /*-webkit-overflow-scrolling: touch;*/
   font-size: 16px;
   overflow: auto;
@@ -461,7 +490,7 @@ input[type=checkbox] {
 .swiper-containerSchema .swiper-pagination  {
   position: fixed;
   width: 100%;
-  top: -10px;  
+  top: -10px;
   margin-bottom: 50px;
   z-index:2;
 }
@@ -531,4 +560,3 @@ input[type=checkbox] {
 .meSign {
   display: none;
 }
-
