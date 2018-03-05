@@ -2,6 +2,7 @@ body {
   font-size: 16px;
   background-color: #edf0f1;
   font-family: 'Roboto', sans-serif;
+  height: 100%;
 }
 
 /*SCHEMA*/
@@ -204,6 +205,9 @@ svg {
   /*-webkit-overflow-scrolling: touch;*/
   font-size: 16px;
   overflow: auto;
+
+  min-height: 100%;
+  position:relative;
 }
 
 .scheman p {
@@ -347,6 +351,7 @@ input[type=checkbox] {
 #creator {
   position: absolute;
   margin-top: 10px;
+  height: 50px;
   left: 0px;
   bottom: 0px;
   width: 100%;
@@ -354,7 +359,7 @@ input[type=checkbox] {
   color: #bfbfbf;
   display: flex;
   justify-content: space-around;
-  margin-bottom: 5px;
+  /*margin-bottom: 5px;*/
   align-items: center;
 }
 
