@@ -27,7 +27,6 @@ input {
   box-shadow: 0px 3px 3px rgba(44,62,80,0.15);
 }
 
-
 .barName {
   width: 100%;
   position: absolute;
@@ -64,7 +63,7 @@ input {
   z-index: 1000000;
   overflow: auto;
    -webkit-overflow-scrolling: touch;
-  box-shadow: 3px 3px 5px rgba(44,62,80,0.15);
+  box-shadow: 3px 3px 5px rgba(44,62,80,0.15), -3px 0px 5px rgba(44,62,80,0.15);
 }
 
 .weekModal ul {
@@ -115,6 +114,43 @@ input {
   cursor: pointer;
 }
 
+#timeLine {
+  height: 2px;
+  line-height: 2px;
+  overflow: hidden;
+  font-size: 0.1px;
+  width: calc(100% - 11px);
+  background-color: red;
+  position: absolute;
+  z-index: 10;
+  bottom: 151.25px;
+}
+
+#timeBall {
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-left: 10px solid red;
+  border-bottom: 5px solid transparent;
+  position: absolute;
+  z-index: 10;
+  margin-left: -8px;
+  margin-bottom: -4px;
+}
+
+#timeStamp {
+  position: relative;
+  margin-top: -22.5px;
+  color: red;
+  font-weight: bold;
+  left: 5px;
+  font-size: 14px;
+}
+
+.goldMemberSign {
+  display: none;
+}
+
 .barBottom {
   height: 50px;
   width: 100%;
@@ -125,7 +161,7 @@ input {
   color: white;
   font-weight: bold;
   z-index: 5;
-  box-shadow: 0px -1px 1px rgba(0,0,0,0.15);
+  box-shadow: 0px -1px 1px rgba(0,0,0,0.025);
 }
 
 .barUl {
@@ -215,9 +251,13 @@ svg {
   width: 100%;
   background-color: white;
   list-style: none;
-  box-shadow: 0px 1px 2px rgba(44,62,80,0.15);
+  box-shadow: 0px 1px 2px rgba(0,0,0,0.05);
   margin-bottom: 2px;
   padding: 5px;
+}
+
+.meSign {
+  display: none;
 }
 
 #addSchedule {
@@ -346,15 +386,16 @@ input[type=checkbox] {
 
 #creator {
   position: fixed;
-  margin-top: 10px;
   left: 0px;
   bottom: 0px;
+  padding-bottom: 5px;
   width: 100%;
+  height: 30px;
+  background-color: #edf0f1;
   font-size: 14px;
   color: #bfbfbf;
   display: flex;
   justify-content: space-around;
-  margin-bottom: 5px;
   align-items: center;
 }
 
@@ -454,6 +495,12 @@ input[type=checkbox] {
   margin-bottom: 5px;
 }
 
+/*swiper*/
+#swiper-slideMat {
+   position: relative;
+   top: 20px;
+}
+
 .swiper-containerSchema {
   width: 100%;
   height: 100%;
@@ -499,7 +546,7 @@ input[type=checkbox] {
   border-bottom: 2.5px solid red;
   color: red;
 }
-/*nytt*/
+
 .swiper-container {
   width: 100%;
   height:100%;
@@ -511,52 +558,4 @@ input[type=checkbox] {
   padding-top: 40px;
   left: -10px;
   padding-left: 10px;
-}
-
-#swiper-slideMat {
-   position: relative;
-   top: 20px;
-}
-
-/*ovan nytt*/
-
-#timeLine {
-  height: 2px;
-  line-height: 2px;
-  overflow: hidden;
-  font-size: 0.1px;
-  width: calc(100% - 11px);
-  background-color: red;
-  position: absolute;
-  z-index: 10;
-  bottom: 151.25px;
-}
-
-#timeBall {
-  width: 0;
-  height: 0;
-  border-top: 5px solid transparent;
-  border-left: 10px solid red;
-  border-bottom: 5px solid transparent;
-  position: absolute;
-  z-index: 10;
-  margin-left: -8px;
-  margin-bottom: -4px;
-}
-
-#timeStamp {
-  position: relative;
-  margin-top: -22.5px;
-  color: red;
-  font-weight: bold;
-  left: 5px;
-  font-size: 14px;
-}
-
-.goldMemberSign {
-  display: none;
-}
-
-.meSign {
-  display: none;
 }
