@@ -301,6 +301,10 @@ function getFood(callback) {
   xhttp.send();
 }
 
+$('.whyTho').click(function() {
+  alert('Eftersom att en viss person är fattig och inte vill stå för server- och domänkostnaderna visas reklam. Så fort tillräckligt med pengar har genererats för att betala månadskostnaden kommer reklamen att tas bort. (Pls swisha.)')
+})
+
 getFood();
 
 var dayArr = ['Mån', 'Tis', 'Ons', 'Tor', 'Fre'];

@@ -247,6 +247,14 @@ svg {
   margin-right: 5px;
 }
 
+.whyTho {
+  position: absolute;
+  bottom: 10px;
+  text-decoration: underline;
+  color: #bfbfbf;
+  z-index: -1;
+}
+
 /*SETTINGS*/
 #settings {
   display: none;
