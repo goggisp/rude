@@ -200,7 +200,7 @@ svg {
 }
 
 #matDiv {
-  height: calc(100% - 160px);
+  height: calc(100% - 80px);
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -208,26 +208,44 @@ svg {
   align-items: center;
   position: relative;
   left: -10px;
+  top: -40px;
   font-size: 16px;
   padding: 0 10px 0 10px;
 
 }
 
-#matUl {
+#matDiv ul {
     width: 100%;
+    margin-bottom: 10px;
 }
 
-#matUl li:first-child {
+#matDiv ul li:first-child {
   font-weight: bold;
-  font-size: 17px;
+  font-size: 18px;
+  margin-left: 5px;
+  margin-bottom: 2px;
 }
 
 .matLi {
   width: 100%;
-  min-height: 30px;
+  min-height: 10px;
   background-color: white;
   padding: 5px;
-  margin-top: 5px;
+  list-style: none;
+  margin-bottom: 2px;
+  padding: 5px;
+  box-shadow: 0px 1px 2px rgba(0,0,0,0.05);
+}
+
+.matDagSpan {
+  float: left;
+  width: 40px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin-right: 5px;
 }
 
 /*SETTINGS*/
@@ -254,7 +272,7 @@ svg {
 }
 
 .scheman p {
-  margin-bottom: 2.5px;
+  margin-bottom: 2px;
   margin-left: 5px;
   font-weight: bold;
   font-size: 18px;

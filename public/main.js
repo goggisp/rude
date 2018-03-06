@@ -5,7 +5,12 @@ $('#intro').show();
 if(localStorage.getItem('name1') !== null) {
   $('#firstInput').val(localStorage.getItem('name1').substr(0, localStorage.getItem('name1').indexOf(' ')));
   $('#lastInput').val(localStorage.getItem('name1').substr(localStorage.getItem('name1').indexOf(' ')+1));
-  getInfo();
+  // setTimeout( function() {
+  //     doEverything();
+  // }, 1);
+  $(document).ready(function(){
+    doEverything();
+  });
 }
 
 $('#introBtn').click(function() {
@@ -63,55 +68,56 @@ function getInfo() {
       requestedId = requestedId.substring(requestedId.indexOf('{')+1, requestedId.indexOf('}'));
 
       if (requestedId !== '') {
-        $('#intro').slideUp();
-        $('#divSchema').delay(400).fadeIn(1000);
-
         localStorage.setItem('1', requestedId);
         localStorage.setItem('current', requestedId);
-
-        //nedan: loggar in automatiskt nästa gång startas om eftersom
-        //name i LS inte kan skapas om inte getInfo() gått igenom
         localStorage.setItem('name1', originalFirstName+' '+originalLastName);
 
-        var nameArr =[];
-        for (var i = 0; i < localStorage.length; i++) {
-          if (localStorage.key(i).substr(0, 4) == 'name') {
-            nameArr.push(localStorage.key(i));
-          }
-        }
-
-        for (var i = 1; i <= nameArr.length; i++) {
-          var name = localStorage.getItem('name'+i);
-          var lastName = name.substr(name.indexOf(' ')+1);
-          $('.barUl').append('<li class="barLi" id="'+i+'barLi"><p>' + name.substr(0,1) + lastName.substr(0,1) + '</p></li>');
-          $('#schemanUl').append('<li class="schemanLi" id="'+i+'schemanLi">'+name+'<span class="meSign">&nbsp;JAG</span><span class="goldMemberSign">&nbsp;GOLD MEMBER</span></li>');
-        }
-
-        if (nameArr.length > 1) {
-          $('#1barLi').find('p').css('color', 'red');
-          restart();
-        }
-
-	 if((localStorage.length-1)/2 < $('.barLi').length) {
-          location.reload();
-          console.log('Y u max the submit btn?');
-        }
-
-        //reloadiframes först eftersom resten hämtar från DOM
-        reloadIframes();
-        $.when($.ajax(appendWeeks())).then(setWeek());
-        $.when($.ajax(setWeek())).then(modalRestart());
-
-        addRemoveBtn();
-        setColor();
-
-        gold();
-        meSign();
+        doEverything();
       } else {
         $('#welcome').text('Hittade inte ditt schema :-( Kolla stavning och internetanslutning! OBS: Skriv ut ev. flera efternamn & áccéntér.').css({'color': 'red', 'font-size': '16px'});
       }
     });
   }
+}
+
+function doEverything() {
+  $('#intro').slideUp();
+  $('#divSchema').delay(400).fadeIn(1000);
+
+  var nameArr =[];
+  for (var i = 0; i < localStorage.length; i++) {
+    if (localStorage.key(i).substr(0, 4) == 'name') {
+      nameArr.push(localStorage.key(i));
+    }
+  }
+
+  for (var i = 1; i <= nameArr.length; i++) {
+    var name = localStorage.getItem('name'+i);
+    var lastName = name.substr(name.indexOf(' ')+1);
+    $('.barUl').append('<li class="barLi" id="'+i+'barLi"><p>' + name.substr(0,1) + lastName.substr(0,1) + '</p></li>');
+    $('#schemanUl').append('<li class="schemanLi" id="'+i+'schemanLi">'+name+'<span class="meSign">&nbsp;JAG</span><span class="goldMemberSign">&nbsp;GOLD MEMBER</span></li>');
+  }
+
+  if (nameArr.length > 1) {
+    $('#1barLi').find('p').css('color', 'red');
+    restart();
+  }
+
+  if((localStorage.length-1)/2 < $('.barLi').length) {
+    location.reload();
+    console.log('Y u max the submit btn?');
+  }
+
+  //reloadiframes först eftersom resten hämtar från DOM
+  reloadIframes();
+  $.when($.ajax(appendWeeks())).then(setWeek());
+  $.when($.ajax(setWeek())).then(modalRestart());
+
+  addRemoveBtn();
+  setColor();
+
+  gold();
+  meSign();
 }
 
 //current och googles sparas i ls
@@ -124,81 +130,7 @@ if (localStorage.length < 3) {
   $('#disclaimerCreator').append('<p>Thim Högberg</p> <p>hogberg.thim@gmail.com</p>')
 }
 
-$('#removeScheduleBtn').click(function() {
-  $('.removeSchedule').stop(true).slideToggle(200);
-})
-
-//TA BORT schema
-function addRemoveBtn() {
-  $('.schemanLi').find('.removeSchedule').remove();
-  $('.schemanLi').append('<svg class="removeSchedule" version="1.1" xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"> <g id="icomoon-ignore"> </g> <path d="M64 160v320c0 17.6 14.4 32 32 32h288c17.6 0 32-14.4 32-32v-320h-352zM160 448h-32v-224h32v224zM224 448h-32v-224h32v224zM288 448h-32v-224h32v224zM352 448h-32v-224h32v224z"></path> <path d="M424 64h-104v-40c0-13.2-10.8-24-24-24h-112c-13.2 0-24 10.8-24 24v40h-104c-13.2 0-24 10.8-24 24v40h416v-40c0-13.2-10.8-24-24-24zM288 64h-96v-31.599h96v31.599z"></path> </svg> ');
-
-  $('.removeSchedule').click(function() {
-
-    var whichId = $(this).parent().attr('id').substr(0,1);
-    //updatera localStorage
-    var nameArr =[];
-    for (var i = 0; i < localStorage.length; i++) {
-      if (localStorage.key(i).substr(0, 4) == 'name') {
-        nameArr.push(localStorage.key(i));
-      }
-    }
-    //om schemat som tas bort är det sista i localstorage awesome!! annars...
-    if (whichId == nameArr.length) {
-      localStorage.removeItem(whichId);
-      localStorage.removeItem('name'+whichId);
-      console.log('removed last localstorage..');
-    } else {
-      localStorage.removeItem(whichId);
-      localStorage.removeItem('name'+whichId);
-
-      //subtraherar 1 från keyn på de med key större än den som togs bort
-      for (var i = whichId, l = nameArr.length; i< l; i++) {
-        console.log(nameArr.length);
-        localStorage.setItem(i, localStorage.getItem(parseInt(i)+1));
-
-        var iplusone = parseInt(i) + 1;
-        localStorage.setItem('name'+i, localStorage.getItem('name' + iplusone));
-        localStorage.removeItem(iplusone);
-        localStorage.removeItem('name'+iplusone);
-        nameArr.length = 0;
-        $('#'+iplusone+'schemanLi').attr('id', i + 'schemanLi');
-        $('#'+iplusone+'barLi').attr('id', i + 'barLi');
-
-        var currentId = localStorage.getItem('current');
-        //currentId mst stå innan set item current
-        localStorage.setItem('current', localStorage.getItem('1'));
-
-        //byter oavsett tidigare schema till nr 1
-        $('.iframeSchema').each(function() {
-            $(this).attr('src', $(this).attr('src').replace(currentId, localStorage.getItem('1')));
-        })
-        restart();
-      }
-    }
-
-    $(this).parent().remove();
-    $('#'+whichId+'barLi').remove();
-    nameArr.length = 0;
-    $.when($.ajax()).then(setWeek());
-
-    if($('.barLi').length < 2) {
-      location.reload();
-      $('#settings').show();
-    } else if ($('.barLi').length < 1) {
-      location.reload();
-    } else {
-      $('.barLi').find('p').css('color', 'grey');
-      $('.gold').find('p').css('color', '#D4AF37');
-      $('#1barLi').find('p').css('color', 'red');
-    }
-    if(whichId == 1) {
-      meSign();
-      localStorage.removeItem('color');
-    }
-  })
-}
-
+//mainpage
 var today = new Date();
 var todayDay = today.getDay();
 
@@ -211,8 +143,10 @@ Date.prototype.getWeek = function() {
 
 var iframeWeek = today.getWeek();
 
+if (termin == 'Ht') { var lastDay = new Date(today.getYear(), 11, 31) } else { var lastDay = new Date(today.getYear(), 5, 24) };
+
+
 if (today.getDay() == 6 || today.getDay() == 0) {
-  //initial slide blir således måndag
   todayDay = 1;
   $('#divSchema .barName').text('HELG HELG HELG');
   $('#divSchema .barName').hide();
@@ -235,7 +169,27 @@ if(localStorage.length < 4 && today.getDay() !== 6 && today.getDay() !== 0) {
   }, 4500);
 }
 
-if (termin == 'Ht') { var lastDay = new Date(today.getYear(), 11, 31) } else { var lastDay = new Date(today.getYear(), 5, 24) };
+function restart() {
+  $('.barLi').on('click', function() {
+    var barLiId = this.id.substr(0,1);
+    var id = localStorage.getItem(barLiId);
+    var currentId = localStorage.getItem('current');
+    localStorage.setItem('current', id);
+
+    function changeEachId() {
+      $('.iframeSchema').each(function() {
+        $(this).attr('src', $(this).attr('src').replace(currentId, id));
+      });
+    }
+    changeEachId();
+    $(this).siblings().find('p').css('color', 'grey');
+    $('.gold').find('p').css('color', '#D4AF37');
+    $(this).find('p').css('color', 'red');
+
+    $('#timeLine, #timeBall').stop(true).fadeIn().delay(2500).fadeOut();
+    $('#timeStamp').stop(true).fadeIn().delay(2500).fadeOut();
+  });
+};
 
 //vecka
 function setWeek() {
@@ -264,7 +218,6 @@ function modalRestart() {
       var iframeUrl = $(this).attr('src');
       var weekEW = iframeUrl.substring(iframeUrl.indexOf('week='), iframeUrl.indexOf('&foot'));
       $(this).attr('src', iframeUrl.replace(weekEW, 'week='+week));
-      console.log('changed week of iframes');
     });
     setWeek();
     scheduleWNewW();
@@ -296,7 +249,6 @@ function scheduleWNewW() {
     $('.swiper-pagination').css('z-index', '2');
   }, 200);
   $('.iframeSchema').fadeIn(100);
-  console.log('new iframe - new week');
 }
 
 $('.weekBtn').click(function() {
@@ -317,6 +269,67 @@ $('#reloadBtn').click(function() {
   location.reload();
 })
 
+//matmatmatviktigtbra
+var foodObj = new Object();
+
+function getFood(callback) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log(this.status);
+
+      var foodArr = Object.values(JSON.parse(this.responseText));
+
+      if (today.getDay() !== 6 || today.getDay() !== 0) {
+        $('#matUlDagens').append('<li class="matLi">'+ foodArr[0]+'</li>');
+
+        for (var i = 1; i < foodArr.length; i++) {
+          $('#matUlResterande').append('<li class="matLi"><span class="matSpan">'+ foodArr[i] +'</span></li>');
+        }
+
+      } else {
+        for (var i = 0; i < foodArr.length; i++) {
+          $('#matUlResterande').append('<li class="matLi"><span class="matSpan">'+ foodArr[i] +'</span></li>');
+        }
+        $('#matUlDagens').hide();
+      }
+      setFoodDays();
+    }
+  };
+  // NOTE: NOTE NOTE
+  xhttp.open("GET", "http://178.62.210.139/mat", true);
+  xhttp.send();
+}
+
+getFood();
+
+var dayArr = ['Mån', 'Tis', 'Ons', 'Tor', 'Fre'];
+
+function setFoodDays() {
+
+  for (var i = 0; i < $('#matUlResterande .matLi').length; i++) {
+    var day = (todayDay + i);
+    $('#matUlResterande .matLi:nth-child('+(i + 2)+')').prepend('<span class="matDagSpan">'+dayArr[day]+'</span>');
+  }
+
+  if ($('#matUlResterande .matLi').length == 1) {
+    $('#matUlResterande li:first-child').text('Imorgon serveras:');
+  } else if ($('#matUlDagens .matLi').length > 0 && $('#matUlResterande .matLi').length < 0) {
+    $('#matUlResterande li:first-child').hide();
+  } else if ($('#matUlResterande .matLi').length < 0 && $('#matUlDagens .matLi').length < 0) {
+    $('#matUlResterande').append('<li class="matLi">Inget att visa</li>');
+  }
+  if ($('#matUlResterande .matLi').length < 1) {
+    console.log();('yo?')
+  }
+
+}
+
+
+
+
+
+
 //settings
 $('.settingsBtn').click(function() {
   $('#settings').stop(true).slideToggle();
@@ -333,6 +346,7 @@ $('#goBack').click(function() {
 })
 
 $('#addSchedule').click(function() {
+  $('#colorInput').slideUp(150);
   $('#addScheduleModal').stop(true).slideToggle(150);
   $('#schemeInputFirst').focus();
   $('#creator').stop(true).slideToggle();
@@ -430,7 +444,7 @@ function addSchedule() {
           $('#1barLi p').css('color', 'red');
         }
 
-	$('#divSchema .barName').text('Schema');
+	       $('#divSchema .barName').text('Schema');
 
         restart();
         setWeek();
@@ -444,7 +458,81 @@ function addSchedule() {
   }
 }
 
+//TA BORT schema
+
+$('#removeScheduleBtn').click(function() {
+  $('.removeSchedule').stop(true).slideToggle(200);
+})
+
+function addRemoveBtn() {
+  $('.schemanLi').find('.removeSchedule').remove();
+  $('.schemanLi').append('<svg class="removeSchedule" version="1.1" xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"> <g id="icomoon-ignore"> </g> <path d="M64 160v320c0 17.6 14.4 32 32 32h288c17.6 0 32-14.4 32-32v-320h-352zM160 448h-32v-224h32v224zM224 448h-32v-224h32v224zM288 448h-32v-224h32v224zM352 448h-32v-224h32v224z"></path> <path d="M424 64h-104v-40c0-13.2-10.8-24-24-24h-112c-13.2 0-24 10.8-24 24v40h-104c-13.2 0-24 10.8-24 24v40h416v-40c0-13.2-10.8-24-24-24zM288 64h-96v-31.599h96v31.599z"></path> </svg> ');
+
+  $('.removeSchedule').click(function() {
+
+    var whichId = $(this).parent().attr('id').substr(0,1);
+    //updatera localStorage
+    var nameArr =[];
+    for (var i = 0; i < localStorage.length; i++) {
+      if (localStorage.key(i).substr(0, 4) == 'name') {
+        nameArr.push(localStorage.key(i));
+      }
+    }
+    //om schemat som tas bort är det sista i localstorage awesome!! annars...
+    if (whichId == nameArr.length) {
+      localStorage.removeItem(whichId);
+      localStorage.removeItem('name'+whichId);
+    } else {
+      localStorage.removeItem(whichId);
+      localStorage.removeItem('name'+whichId);
+
+      //subtraherar 1 från keyn på de med key större än den som togs bort
+      for (var i = whichId, l = nameArr.length; i< l; i++) {
+        localStorage.setItem(i, localStorage.getItem(parseInt(i)+1));
+
+        var iplusone = parseInt(i) + 1;
+        localStorage.setItem('name'+i, localStorage.getItem('name' + iplusone));
+        localStorage.removeItem(iplusone);
+        localStorage.removeItem('name'+iplusone);
+        nameArr.length = 0;
+        $('#'+iplusone+'schemanLi').attr('id', i + 'schemanLi');
+        $('#'+iplusone+'barLi').attr('id', i + 'barLi');
+
+        var currentId = localStorage.getItem('current');
+        //currentId mst stå innan set item current
+        localStorage.setItem('current', localStorage.getItem('1'));
+
+        //byter oavsett tidigare schema till nr 1
+        $('.iframeSchema').each(function() {
+            $(this).attr('src', $(this).attr('src').replace(currentId, localStorage.getItem('1')));
+        })
+        restart();
+      }
+    }
+
+    $(this).parent().remove();
+    $('#'+whichId+'barLi').remove();
+    nameArr.length = 0;
+    $.when($.ajax()).then(setWeek());
+
+    if($('.barLi').length == 1) {
+      $('#1barLi').find('p').css('color', 'grey');
+    } else if ($('.barLi').length < 1) {
+      location.reload();
+    } else {
+      $('.barLi').find('p').css('color', 'grey');
+      $('.gold').find('p').css('color', '#D4AF37');
+      $('#1barLi').find('p').css('color', 'red');
+    }
+    if(whichId == 1) {
+      meSign();
+      localStorage.removeItem('color');
+    }
+  })
+}
+
 $('#changeColor').click(function() {
+  $('#addScheduleModal').slideUp(150);
   $('#colorInput').stop(true).slideToggle(150);
   $('#creator').stop(true).slideToggle();
   $('#colorInput').focus();
@@ -463,28 +551,6 @@ function setColor() {
   var color = localStorage.getItem('color');
   $('.barTop').css('background-color', color);
 }
-
-function restart() {
-  $('.barLi').on('click', function() {
-    var barLiId = this.id.substr(0,1);
-    var id = localStorage.getItem(barLiId);
-    var currentId = localStorage.getItem('current');
-    localStorage.setItem('current', id);
-
-    function changeEachId() {
-      $('.iframeSchema').each(function() {
-        $(this).attr('src', $(this).attr('src').replace(currentId, id));
-      });
-    }
-    changeEachId();
-    $(this).siblings().find('p').css('color', 'grey');
-    $('.gold').find('p').css('color', '#D4AF37');
-    $(this).find('p').css('color', 'red');
-
-    $('#timeLine, #timeBall').stop(true).fadeIn().delay(2500).fadeOut();
-    $('#timeStamp').stop(true).fadeIn().delay(2500).fadeOut();
-  });
-};
 
 //schema append
 var days = ['mon','tue','wed','thu','fri'];
@@ -525,7 +591,7 @@ function reloadSwipe() {
     direction: 'vertical',
     height: $('body').height(),
    // spaceBetween: 10,
-    });
+  });
 }
 
 var orgWArr = [];
@@ -590,6 +656,7 @@ function showTime() {
     /*setTimeout(function() {
       location.reload();
     },5*60000);*/
+
   }
 }
 
@@ -628,7 +695,7 @@ function meSign() {
 
 // NOTE:
 $('#blogg').hide();
-if(localStorage.length <= 1) {
+if(localStorage.length < 1) {
   $('#firstInput').val('Thim');
   $('#lastInput').val('Högberg');
   getInfo();
