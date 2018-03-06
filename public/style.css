@@ -2,6 +2,7 @@ body {
   font-size: 16px;
   background-color: #edf0f1;
   font-family: 'Roboto', sans-serif;
+  overflow: hidden;
 }
 
 ::-webkit-scrollbar {
@@ -252,7 +253,6 @@ svg {
   bottom: 10px;
   text-decoration: underline;
   color: #bfbfbf;
-  z-index: -1;
 }
 
 /*SETTINGS*/
@@ -276,6 +276,7 @@ svg {
   height: 100%;
   width: 100%;
   -webkit-overflow-scrolling: touch;
+  overflow: auto;
 }
 
 .scheman p {
