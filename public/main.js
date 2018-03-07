@@ -623,7 +623,7 @@ $(window).resize(function() {
     this.resizeTO = setTimeout(function() {
         $(this).trigger('resizeEnd');
         orgWArr.push($('body').width());
-    }, 500);
+    }, 200);
 });
 
 $(window).bind('resizeEnd', function() {
