@@ -81,8 +81,8 @@ function getInfo() {
 }
 
 function doEverything() {
-  $('#intro').slideUp();
-  $('#divSchema').delay(400).fadeIn(1000);
+  $('#intro').delay(500).slideUp();
+  $('#divSchema').delay(750).fadeIn(250);
 
   var nameArr =[];
   for (var i = 0; i < localStorage.length; i++) {
@@ -100,8 +100,8 @@ function doEverything() {
 
   if (nameArr.length > 1) {
     $('#1barLi').find('p').css('color', 'red');
-    restart();
   }
+  restart();
 
   if((localStorage.length-1)/2 < $('.barLi').length) {
     location.reload();
@@ -164,27 +164,29 @@ if(localStorage.length < 4 && today.getDay() !== 6 && today.getDay() !== 0) {
   $('#divSchema .barName').delay(1500).fadeIn().delay(2000).fadeOut();
   setTimeout( function() {
     $('#divSchema .barName').hide();
-    $('#divSchema .barName').text('Schema');
+    $('#divSchema .barName').text('rudebecks.me');
     $('#divSchema .barName').fadeIn();
   }, 4500);
 }
 
 function restart() {
   $('.barLi').on('click', function() {
-    var barLiId = this.id.substr(0,1);
-    var id = localStorage.getItem(barLiId);
-    var currentId = localStorage.getItem('current');
-    localStorage.setItem('current', id);
 
-    function changeEachId() {
-      $('.iframeSchema').each(function() {
-        $(this).attr('src', $(this).attr('src').replace(currentId, id));
-      });
+    if ($('.barLi').length > 1) {
+      var barLiId = this.id.substr(0,1);
+      var id = localStorage.getItem(barLiId);
+      var currentId = localStorage.getItem('current');
+      localStorage.setItem('current', id);
+      function changeEachId() {
+        $('.iframeSchema').each(function() {
+          $(this).attr('src', $(this).attr('src').replace(currentId, id));
+        });
+      }
+      changeEachId();
+      $(this).siblings().find('p').css('color', 'grey');
+      $('.gold').find('p').css('color', '#D4AF37');
+      $(this).find('p').css('color', 'red');
     }
-    changeEachId();
-    $(this).siblings().find('p').css('color', 'grey');
-    $('.gold').find('p').css('color', '#D4AF37');
-    $(this).find('p').css('color', 'red');
 
     $('#timeLine, #timeBall').stop(true).fadeIn().delay(2500).fadeOut();
     $('#timeStamp').stop(true).fadeIn().delay(2500).fadeOut();
@@ -227,7 +229,7 @@ function modalRestart() {
 if(week !== iframeWeek) {
       $('#timeLine, #timeBall, #timeStamp').hide();
       $('#divSchema .barName').hide();
-      $('#divSchema .barName').text('Schema för vecka ' + week);
+      $('#divSchema .barName').text('Schema v.' + week);
       $('#divSchema .barName').delay(500).fadeIn();
     }
 
@@ -236,7 +238,7 @@ if(week !== iframeWeek) {
        if (today.getDay() == 6 || today.getDay() == 0) {
         $('#divSchema .barName').text('Nästa veckas schema');
       } else {
-        $('#divSchema .barName').text('Schema');
+        $('#divSchema .barName').text('rudebecks.me');
       }
     }
  })
@@ -294,6 +296,7 @@ function getFood(callback) {
         $('#matUlDagens').hide();
       }
       setFoodDays();
+      refineAds();
     }
   };
   // NOTE: NOTE NOTE
@@ -310,7 +313,6 @@ getFood();
 var dayArr = ['Mån', 'Tis', 'Ons', 'Tor', 'Fre'];
 
 function setFoodDays() {
-
   for (var i = 0; i < $('#matUlResterande .matLi').length; i++) {
     var day = (todayDay + i);
     $('#matUlResterande .matLi:nth-child('+(i + 2)+')').prepend('<span class="matDagSpan">'+dayArr[day]+'</span>');
@@ -326,13 +328,27 @@ function setFoodDays() {
   if ($('#matUlResterande .matLi').length < 1) {
     console.log();('yo?')
   }
-
 }
 
+function refineAds() {
+  if ($('#matUlDagens .matLi').length > 0 && $('#matUlResterande .matLi').length > 0) {
+    var heightOfListItems = ($('#matUlResterande .matLi').length + 1)*28 + 2*23;
+  } else if ($('#matUlDagens .matLi').length > 0 && $('#matUlResterande .matLi').length == 0 ) {
+    var heightOfListItems = (23 + 28);
+  } else {
+    var heightOfListItems = ($('#matUlResterande .matLi').length)*28 + 23;
+  }
+  //sista 5:an - blir snyggare
+  var margins = (10 + 33 + 10 + 5 + 5);
+  var bars = (60 + 50)
+  var height = $('body').height() - (heightOfListItems + margins + bars);
 
-
-
-
+  if (height < 250) {
+    $('#matAdBig').hide();
+    $('#matAdSmall').show();
+    $('#matAdDiv').css('height', '100px');
+  }
+}
 
 //settings
 $('.settingsBtn').click(function() {
@@ -448,7 +464,7 @@ function addSchedule() {
           $('#1barLi p').css('color', 'red');
         }
 
-	       $('#divSchema .barName').text('Schema');
+	       $('#divSchema .barName').text('rudebecks.me');
 
         restart();
         setWeek();
@@ -611,21 +627,22 @@ $(window).resize(function() {
 });
 
 $(window).bind('resizeEnd', function() {
-  console.log('resized');
-  var imgHeight = $('body').height() - 165;
-  var imgWidth = $('body').width()-20;
-  var heightLength = (imgHeight.toString().length + 8);
-
-  if(orgWArr[orgWArr.length - 1] == (imgWidth+20)) {
-    $('.iframeSchema').each(function() {
-      $(this).attr('src', $(this).attr('src').replace( $(this).attr('src').substring($(this).attr('src').indexOf('height=')+7, $(this).attr('src').length), imgHeight));
-    })
-    orgWArr.length = 0;
-  } else {
-    orgWArr.length = 0;
-    orgWArr.push($('body').width());
-    location.reload();
-  }
+  // console.log('resized');
+  // var imgHeight = $('body').height() - 165;
+  // var imgWidth = $('body').width()-20;
+  // var heightLength = (imgHeight.toString().length + 8);
+  //
+  // if(orgWArr[orgWArr.length - 1] == (imgWidth+20)) {
+  //   $('.iframeSchema').each(function() {
+  //     $(this).attr('src', $(this).attr('src').replace( $(this).attr('src').substring($(this).attr('src').indexOf('height=')+7, $(this).attr('src').length), imgHeight));
+  //   })
+  //   orgWArr.length = 0;
+  // } else {
+  //   orgWArr.length = 0;
+  //   orgWArr.push($('body').width());
+  //   location.reload();
+  // }
+  location.reload();
   showTime();
 });
 

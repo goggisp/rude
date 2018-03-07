@@ -225,6 +225,14 @@ svg {
   margin-bottom: 2px;
 }
 
+#matUlDagens {
+  margin-top: 10px;
+}
+
+#matUlResterande {
+  margin-bottom: 33px;
+}
+
 .matLi {
   width: 100%;
   min-height: 10px;
