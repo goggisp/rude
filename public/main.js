@@ -69,7 +69,6 @@ function getInfo() {
 
       if (requestedId !== '') {
         localStorage.setItem('1', requestedId);
-        localStorage.setItem('current', requestedId);
         localStorage.setItem('name1', originalFirstName+' '+originalLastName);
 
         doEverything();
@@ -81,6 +80,8 @@ function getInfo() {
 }
 
 function doEverything() {
+  localStorage.setItem('current', localStorage.getItem('1'));
+
   $('#intro').delay(500).slideUp();
   $('#divSchema').delay(750).fadeIn(250);
 
