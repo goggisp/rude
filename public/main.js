@@ -104,9 +104,21 @@ function doEverything() {
   }
   restart();
 
-  if((localStorage.length-1)/2 < $('.barLi').length) {
+  // if((localStorage.length-1)/2 < $('.barLi').length) {
+  //   location.reload();
+  //   console.log('Y u max the submit btn?');
+  // }
+
+  var nameArr =[];
+  for (var i = 0; i < localStorage.length; i++) {
+    if (localStorage.key(i).substr(0, 4) == 'name') {
+      nameArr.push(localStorage.key(i));
+    }
+  }
+
+  if (nameArr.length < $('.barLi').length) {
+    $('#divSchema .barName').text('Uppdaterar...');
     location.reload();
-    console.log('Y u max the submit btn?');
   }
 
   //reloadiframes först eftersom resten hämtar från DOM
