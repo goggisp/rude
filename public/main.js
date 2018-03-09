@@ -1,3 +1,5 @@
+//© Thim Högberg 2018
+
 //intro
 $('#divSchema').hide();
 $('#intro').show();
@@ -295,14 +297,15 @@ function getFood(callback) {
 
       var foodArr = Object.values(JSON.parse(this.responseText));
 
-      if (today.getDay() !== 6 || today.getDay() !== 0) {
+      if (today.getDay() !== 6 && today.getDay() !== 0 && today.getDay() !== 5) {
         $('#matUlDagens').append('<li class="matLi">'+ foodArr[0]+'</li>');
-
         for (var i = 1; i < foodArr.length; i++) {
           $('#matUlResterande').append('<li class="matLi"><span class="matSpan">'+ foodArr[i] +'</span></li>');
         }
 
-      } else {
+      } else if (today.getDay() == 5) {
+        $('#matUlDagens').append('<li class="matLi">'+ foodArr[0]+'</li>');
+      } else if (today.getDay() == 6 || today.getDay() == 0){
         for (var i = 0; i < foodArr.length; i++) {
           $('#matUlResterande').append('<li class="matLi"><span class="matSpan">'+ foodArr[i] +'</span></li>');
         }
@@ -333,13 +336,13 @@ function setFoodDays() {
 
   if ($('#matUlResterande .matLi').length == 1) {
     $('#matUlResterande li:first-child').text('Imorgon serveras:');
-  } else if ($('#matUlDagens .matLi').length > 0 && $('#matUlResterande .matLi').length < 0) {
+  } else if ($('#matUlDagens .matLi').length > 0 && $('#matUlResterande .matLi').length < 1) {
     $('#matUlResterande li:first-child').hide();
   } else if ($('#matUlResterande .matLi').length < 0 && $('#matUlDagens .matLi').length < 0) {
     $('#matUlResterande').append('<li class="matLi">Inget att visa</li>');
   }
   if ($('#matUlResterande .matLi').length < 1) {
-    console.log();('yo?')
+    console.log('yo');
   }
 }
 
@@ -735,3 +738,5 @@ if(localStorage.length < 1) {
   getInfo();
   $('#blogg').show();
 }
+
+//© Thim Högberg 2018
