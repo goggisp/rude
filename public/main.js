@@ -732,11 +732,11 @@ function meSign() {
 
 // NOTE:
 $('#blogg').hide();
-if(localStorage.length < 1) {
-  $('#firstInput').val('Thim');
-  $('#lastInput').val('Högberg');
-  getInfo();
-  $('#blogg').show();
-}
+// if(localStorage.length < 1) {
+//   $('#firstInput').val('Thim');
+//   $('#lastInput').val('Högberg');
+//   getInfo();
+//   $('#blogg').show();
+// }
 
 //© Thim Högberg 2018
