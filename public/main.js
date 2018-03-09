@@ -581,6 +581,8 @@ $('#colorInput').keypress(function(e) {
 
       if (color == 'rainbow' || color == 'Rainbow') {
         $('.barTop').addClass('rainBow');
+      } else {
+        $('.barTop').removeClass('rainBow');
       }
       localStorage.setItem('color', color);
       setColor();
