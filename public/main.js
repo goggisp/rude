@@ -578,6 +578,10 @@ $('#colorInput').keypress(function(e) {
     if(e.which == 13) {
       var color = $('#colorInput').val();
       $('#colorInput').val('');
+
+      if (color == 'rainbow' || color == 'Rainbow') {
+        $('.barTop').addClass('rainBow');
+      }
       localStorage.setItem('color', color);
       setColor();
     }
@@ -585,7 +589,12 @@ $('#colorInput').keypress(function(e) {
 
 function setColor() {
   var color = localStorage.getItem('color');
-  $('.barTop').css('background-color', color);
+  if ( color == 'Rainbow' || color == 'rainbow') {
+    $('.barTop').addClass('rainBow');
+
+  } else {
+    $('.barTop').css('background-color', color);
+  }
 }
 
 //schema append
