@@ -355,34 +355,27 @@ function setFoodDays() {
 }
 
 function refineAds() {
-  if ($('#matUlDagens .matLi').length > 0 && $('#matUlResterande .matLi').length > 0) {
-    var heightOfListItems = ($('#matUlResterande .matLi').length + 1)*28 + 2*23;
-  } else if ($('#matUlDagens .matLi').length > 0 && $('#matUlResterande .matLi').length == 0 ) {
-    var heightOfListItems = (23 + 28);
-  } else {
-    var heightOfListItems = ($('#matUlResterande .matLi').length)*28 + 23;
-  }
-  //sista 5:an - blir snyggare
-  var margins = (10 + 33 + 10 + 5 + 5);
-  var bars = (60 + 50)
-  var height = $('body').height() - (heightOfListItems + margins + bars);
+  $(document).ready(function() {
+    if ($('#matUlDagens .matLi').length > 0 && $('#matUlResterande .matLi').length > 0) {
+      var heightOfListItems = $('#matUlDagens').innerHeight() + $('#matUlResterande').innerHeight();
+    } else if ($('#matUlDagens .matLi').length > 0 && $('#matUlResterande .matLi').length == 0 ) {
+      var heightOfListItems = $('#matUlDagens').innerHeight();
+    } else {
+      var heightOfListItems = $('#matUlResterande').innerHeight() - 25;
+    }
+    //sista 10:an - blir snyggare
+    console.log(heightOfListItems);
+    var margins = (10 + 33 + 10 + 5 + 10);
+    var bars = (60 + 50)
+    var height = $('body').height() - (heightOfListItems + margins + bars);
 
-  if (height < 250) {
-    $('#matAdBig').hide();
-    $('#matAdSmall').show();
-    $('#matAdDiv').css('height', '100px');
-  }
-
-
-
-
+    if (height < 250) {
+      $('#matAdBig').hide();
+      $('#matAdSmall').show();
+      $('#matAdDiv').css('height', '100px');
+    }
+  })
 }
-
-setTimeout(function() {
-  console.log($('#matUlDagens').innerHeight());
-  console.log($('#matUlResterande').innerHeight());
-
-},3000);
 
 
 //settings
