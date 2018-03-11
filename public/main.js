@@ -302,7 +302,6 @@ function getFood(callback) {
         for (var i = 1; i < foodArr.length; i++) {
           $('#matUlResterande').append('<li class="matLi"><span class="matSpan">'+ foodArr[i] +'</span></li>');
         }
-
       } else if (today.getDay() == 5) {
         $('#matUlDagens').append('<li class="matLi">'+ foodArr[0]+'</li>');
       } else if (today.getDay() == 6 || today.getDay() == 0){
@@ -329,9 +328,20 @@ getFood();
 var dayArr = ['Mån', 'Tis', 'Ons', 'Tor', 'Fre'];
 
 function setFoodDays() {
+
   for (var i = 0; i < $('#matUlResterande .matLi').length; i++) {
-    var day = (todayDay + i);
+    if (today.getDay() !== 6 && today.getDay() !== 0) {
+      var day = (todayDay + i);
+    } else {
+      var day = i;
+    }
     $('#matUlResterande .matLi:nth-child('+(i + 2)+')').prepend('<span class="matDagSpan">'+dayArr[day]+'</span>');
+  }
+  if (today.getDay() !== 6 && today.getDay() !== 0) {
+    for (var i = 0; i < $('#matUlResterande .matLi').length; i++) {
+      var day = (todayDay + i);
+      $('#matUlResterande .matLi:nth-child('+(i + 2)+')').prepend('<span class="matDagSpan">'+dayArr[day]+'</span>');
+    }
   }
 
   if ($('#matUlResterande .matLi').length == 1) {
@@ -341,9 +351,7 @@ function setFoodDays() {
   } else if ($('#matUlResterande .matLi').length < 0 && $('#matUlDagens .matLi').length < 0) {
     $('#matUlResterande').append('<li class="matLi">Inget att visa</li>');
   }
-  if ($('#matUlResterande .matLi').length < 1) {
-    console.log('yo');
-  }
+
 }
 
 function refineAds() {
