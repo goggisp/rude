@@ -372,7 +372,18 @@ function refineAds() {
     $('#matAdSmall').show();
     $('#matAdDiv').css('height', '100px');
   }
+
+
+
+
 }
+
+setTimeout(function() {
+  console.log($('#matUlDagens').innerHeight());
+  console.log($('#matUlResterande').innerHeight());
+
+},3000);
+
 
 //settings
 $('.settingsBtn').click(function() {
@@ -716,7 +727,7 @@ function showTime() {
   }
 }
 
-var goldPersonList = ['Joseph Wokil', 'Peter Stahre', 'Oscar Dunnington', 'Emelie Hitzeroth'];
+var goldPersonList = ['Joseph Wokil', 'Peter Stahre', 'Oscar Dunnington', 'Emelie Hitzeroth', 'Anja Zethraeus'];
 
 function gold() {
   var goldArr = [];
