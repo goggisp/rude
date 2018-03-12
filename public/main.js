@@ -311,7 +311,9 @@ function getFood(callback) {
         $('#matUlDagens').hide();
       }
       setFoodDays();
-      refineAds();
+      $(document).ready(function() {
+        refineAds();
+      })
     }
   };
   // NOTE: NOTE NOTE
@@ -337,12 +339,6 @@ function setFoodDays() {
     }
     $('#matUlResterande .matLi:nth-child('+(i + 2)+')').prepend('<span class="matDagSpan">'+dayArr[day]+'</span>');
   }
-  if (today.getDay() !== 6 && today.getDay() !== 0) {
-    for (var i = 0; i < $('#matUlResterande .matLi').length; i++) {
-      var day = (todayDay + i);
-      $('#matUlResterande .matLi:nth-child('+(i + 2)+')').prepend('<span class="matDagSpan">'+dayArr[day]+'</span>');
-    }
-  }
 
   if ($('#matUlResterande .matLi').length == 1) {
     $('#matUlResterande li:first-child').text('Imorgon serveras:');
@@ -355,26 +351,24 @@ function setFoodDays() {
 }
 
 function refineAds() {
-  $(document).ready(function() {
-    if ($('#matUlDagens .matLi').length > 0 && $('#matUlResterande .matLi').length > 0) {
-      var heightOfListItems = $('#matUlDagens').innerHeight() + $('#matUlResterande').innerHeight();
-    } else if ($('#matUlDagens .matLi').length > 0 && $('#matUlResterande .matLi').length == 0 ) {
-      var heightOfListItems = $('#matUlDagens').innerHeight();
-    } else {
-      var heightOfListItems = $('#matUlResterande').innerHeight() - 25;
-    }
-    //sista 10:an - blir snyggare
-    console.log(heightOfListItems);
-    var margins = (10 + 33 + 10 + 5 + 10);
-    var bars = (60 + 50)
-    var height = $('body').height() - (heightOfListItems + margins + bars);
+  if ($('#matUlDagens .matLi').length > 0 && $('#matUlResterande .matLi').length > 0) {
+    var heightOfListItems = $('#matUlDagens').innerHeight() + $('#matUlResterande').innerHeight();
+  } else if ($('#matUlDagens .matLi').length > 0 && $('#matUlResterande .matLi').length == 0 ) {
+    var heightOfListItems = $('#matUlDagens').innerHeight();
+  } else {
+    var heightOfListItems = $('#matUlResterande').innerHeight() - 25;
+  }
+  //sista 10:an - blir snyggare
+  console.log(heightOfListItems);
+  var margins = (10 + 33 + 10 + 5 + 10);
+  var bars = (60 + 50)
+  var height = $('body').height() - (heightOfListItems + margins + bars);
 
-    if (height < 250) {
-      $('#matAdBig').hide();
-      $('#matAdSmall').show();
-      $('#matAdDiv').css('height', '100px');
-    }
-  })
+  if (height < 250) {
+    $('#matAdBig').hide();
+    $('#matAdSmall').show();
+    $('#matAdDiv').css('height', '100px');
+  }
 }
 
 
