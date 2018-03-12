@@ -312,7 +312,9 @@ function getFood(callback) {
       }
       setFoodDays();
       $(document).ready(function() {
-        refineAds();
+        setTimeout(function() {
+          refineAds();
+        }, 1000)
       })
     }
   };
