@@ -622,7 +622,12 @@ function reloadIframes() {
   j++;
   }
   showTime();
-  reloadSwipe();
+
+  $(document).ready(function() {
+    setTimeout(function() {
+      reloadSwipe();
+    }, 1000)
+  })
 }
 
 var dayArr = ['Mån', 'Tis', 'Ons', 'Tor', 'Fre'];
