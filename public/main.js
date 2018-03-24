@@ -173,7 +173,7 @@ if (today.getDay() == 6 || today.getDay() == 0) {
   }, 4500);
 }
 
-if(localStorage.length < 4 && today.getDay() !== 6 && today.getDay() !== 0) {
+if(localStorage.getItem('name2') == null && today.getDay() !== 6 && today.getDay() !== 0) {
   $('#divSchema .barName').text('Lägg till fler scheman →');
   $('#divSchema .barName').hide();
   $('#divSchema .barName').delay(1500).fadeIn().delay(2000).fadeOut();
@@ -756,11 +756,11 @@ function meSign() {
 
 // NOTE:
 $('#blogg').hide();
-// if(localStorage.length < 1) {
-//   $('#firstInput').val('Thim');
-//   $('#lastInput').val('Högberg');
-//   getInfo();
-//   $('#blogg').show();
-// }
+if(localStorage.length < 3) {
+  $('#firstInput').val('Thim');
+  $('#lastInput').val('Högberg');
+  getInfo();
+  $('#blogg').show();
+}
 
 //© Thim Högberg 2018
