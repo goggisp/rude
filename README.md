@@ -1,1 +1,1 @@
-# rude
+# © Thim Högberg 2018
