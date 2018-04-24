@@ -236,10 +236,11 @@ svg {
 
 #matUlDagens {
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 #matUlResterande {
-  margin-bottom: 33px;
+  margin-bottom: 10px;
 }
 
 .matLi {

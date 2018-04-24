@@ -299,23 +299,28 @@ function getFood(callback) {
 
       if (today.getDay() !== 6 && today.getDay() !== 0 && today.getDay() !== 5) {
         $('#matUlDagens').append('<li class="matLi">'+ foodArr[0]+'</li>');
-        for (var i = 1; i < foodArr.length; i++) {
+        for (var i = 1; i < (5+1 - todayDay); i++) {
           $('#matUlResterande').append('<li class="matLi"><span class="matSpan">'+ foodArr[i] +'</span></li>');
+        }
+        for (var i = (5+1 - todayDay); i < foodArr.length; i++) {
+          $('#matUlNästa').append('<li class="matLi"><span class="matSpan">'+ foodArr[i] +'</span></li>');
         }
       } else if (today.getDay() == 5) {
         $('#matUlDagens').append('<li class="matLi">'+ foodArr[0]+'</li>');
+        $('#matUlNästa').append('<li class="matLi"><span class="matSpan">'+ foodArr[i] +'</span></li>');
+
       } else if (today.getDay() == 6 || today.getDay() == 0){
         for (var i = 0; i < foodArr.length; i++) {
-          $('#matUlResterande').append('<li class="matLi"><span class="matSpan">'+ foodArr[i] +'</span></li>');
+          $('#matUlNästa').append('<li class="matLi"><span class="matSpan">'+ foodArr[i] +'</span></li>');
         }
-        $('#matUlDagens').hide();
+
       }
       setFoodDays();
-      $(document).ready(function() {
-        setTimeout(function() {
-          refineAds();
-        }, 1000)
-      })
+      // $(document).ready(function() {
+      //   setTimeout(function() {
+      //     refineAds();
+      //   }, 1000)
+      // })
     }
   };
   // NOTE: NOTE NOTE
@@ -324,7 +329,7 @@ function getFood(callback) {
 }
 
 $('.whyTho').click(function() {
-  alert('Eftersom att en viss person är fattig och inte vill stå för server- och domänkostnaderna visas reklam. Så fort tillräckligt med pengar har genererats för att betala månadskostnaden kommer reklamen att tas bort. (Pls swisha.)')
+  alert('Eftersom det kostar pengar att driva rudebecks.me (750kr/år) kan man som användare stötta hemsidan genom en donation. Som tack blir man då tilldelad den enormt prestigefyllda titeln GOLD MEMBER (pls swisha)');
 })
 
 getFood();
@@ -332,7 +337,6 @@ getFood();
 var dayArr = ['Mån', 'Tis', 'Ons', 'Tor', 'Fre'];
 
 function setFoodDays() {
-
   for (var i = 0; i < $('#matUlResterande .matLi').length; i++) {
     if (today.getDay() !== 6 && today.getDay() !== 0) {
       var day = (todayDay + i);
@@ -341,37 +345,50 @@ function setFoodDays() {
     }
     $('#matUlResterande .matLi:nth-child('+(i + 2)+')').prepend('<span class="matDagSpan">'+dayArr[day]+'</span>');
   }
+  //varför 2 - a million dollar question
+  for (var i = 2; i < ($('#matUlNästa .matLi').length + 2); i++) {
+    $('#matUlNästa .matLi:nth-child('+i+')').prepend('<span class="matDagSpan">'+dayArr[i-2]+'</span>');
+  }
 
+  if ($('#matUlDagens .matLi').length < 1) {
+    $('#matUlDagens').hide();
+  }
   if ($('#matUlResterande .matLi').length == 1) {
     $('#matUlResterande li:first-child').text('Imorgon serveras:');
-  } else if ($('#matUlDagens .matLi').length > 0 && $('#matUlResterande .matLi').length < 1) {
-    $('#matUlResterande li:first-child').hide();
-  } else if ($('#matUlResterande .matLi').length < 0 && $('#matUlDagens .matLi').length < 0) {
+  }
+  if ($('#matUlDagens .matLi').length < 0 && $('#matUlResterande .matLi').length < 0 && $('#matUlNästa .matLi').length < 1) {
     $('#matUlResterande').append('<li class="matLi">Inget att visa</li>');
   }
-
-}
-
-function refineAds() {
-  if ($('#matUlDagens .matLi').length > 0 && $('#matUlResterande .matLi').length > 0) {
-    var heightOfListItems = $('#matUlDagens').innerHeight() + $('#matUlResterande').innerHeight();
-  } else if ($('#matUlDagens .matLi').length > 0 && $('#matUlResterande .matLi').length == 0 ) {
-    var heightOfListItems = $('#matUlDagens').innerHeight();
-  } else {
-    var heightOfListItems = $('#matUlResterande').innerHeight() - 25;
+  if ($('#matUlResterande .matLi').length < 1) {
+    $('#matUlResterande').hide();
   }
-  //sista 10:an - blir snyggare
-  console.log(heightOfListItems);
-  var margins = (10 + 33 + 10 + 5 + 10);
-  var bars = (60 + 50)
-  var height = $('body').height() - (heightOfListItems + margins + bars);
-
-  if (height < 250) {
-    $('#matAdBig').hide();
-    $('#matAdSmall').show();
-    $('#matAdDiv').css('height', '100px');
+  if ($('#matUlNästa .matLi').length < 1) {
+    $('#matUlNästa').hide();
   }
 }
+
+
+
+// function refineAds() {
+//   if ($('#matUlDagens .matLi').length > 0 && $('#matUlResterande .matLi').length > 0) {
+//     var heightOfListItems = $('#matUlDagens').innerHeight() + $('#matUlResterande').innerHeight();
+//   } else if ($('#matUlDagens .matLi').length > 0 && $('#matUlResterande .matLi').length == 0 ) {
+//     var heightOfListItems = $('#matUlDagens').innerHeight();
+//   } else {
+//     var heightOfListItems = $('#matUlResterande').innerHeight() - 25;
+//   }
+//   //sista 10:an - blir snyggare
+//   console.log(heightOfListItems);
+//   var margins = (10 + 33 + 10 + 5 + 10);
+//   var bars = (60 + 50)
+//   var height = $('body').height() - (heightOfListItems + margins + bars);
+//
+//   if (height < 250) {
+//     $('#matAdBig').hide();
+//     $('#matAdSmall').show();
+//     $('#matAdDiv').css('height', '100px');
+//   }
+// }
 
 
 //settings
@@ -601,7 +618,7 @@ function setColor() {
   var color = localStorage.getItem('color');
   if ( color == 'Rainbow' || color == 'rainbow') {
     $('.barTop').addClass('rainBow');
-
+    //grattis du hittade det
   } else {
     $('.barTop').css('background-color', color);
   }
@@ -753,14 +770,5 @@ function meSign() {
 }
 
 //gillar du min kod?
-
-// NOTE:
-$('#blogg').hide();
-if(localStorage.length < 3) {
-  $('#firstInput').val('Thim');
-  $('#lastInput').val('Högberg');
-  getInfo();
-  $('#blogg').show();
-}
 
 //© Thim Högberg 2018
