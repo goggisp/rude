@@ -367,8 +367,6 @@ function setFoodDays() {
   }
 }
 
-
-
 // function refineAds() {
 //   if ($('#matUlDagens .matLi').length > 0 && $('#matUlResterande .matLi').length > 0) {
 //     var heightOfListItems = $('#matUlDagens').innerHeight() + $('#matUlResterande').innerHeight();
@@ -447,7 +445,6 @@ function addSchedule() {
   } else if (lastName == '') {
     alert('Du glömde efternamn!');
   } else {
-
     if ($('#capitalizeCheckbox').is(':checked') == false) {
       firstName = firstName.substr(0,1).toUpperCase()+firstName.substr(1);
       lastName = lastName.substr(0,1).toUpperCase()+lastName.substr(1);
@@ -462,18 +459,17 @@ function addSchedule() {
     lastName = lastName.replace('ä', '&#228;');
     firstName = firstName.replace('ö', '&#246;');
     lastName = lastName.replace('ö', '&#246;');
-
     firstName = firstName.replace('Å', '&#197;');
     lastName = lastName.replace('Å', '&#197;');
     firstName = firstName.replace('Ä', '&#196;');
     lastName = lastName.replace('Ä', '&#196;');
     firstName = firstName.replace('Ö', '&#214;');
     lastName = lastName.replace('Ö', '&#214;');
-    // NOTE:ADDSCHEDULE
     firstName = firstName.replace('é', '&#233;');
     lastName = lastName.replace('é', '&#233;');
     firstName = firstName.replace('ü', '&#252;');
     lastName = lastName.replace('ü', '&#252;');
+    // NOTE:ADDSCHEDULE
 
     var name = (lastName + ', ' + firstName);
 
@@ -501,11 +497,11 @@ function addSchedule() {
 
         var currentId = localStorage.getItem('current');
 
-        if(n < 3) {
+        if (n < 3) {
           $('#1barLi p').css('color', 'red');
         }
 
-	       $('#divSchema .barName').text('rudebecks.me');
+	      $('#divSchema .barName').text('rudebecks.me');
 
         restart();
         setWeek();
@@ -520,7 +516,6 @@ function addSchedule() {
 }
 
 //TA BORT schema
-
 $('#removeScheduleBtn').click(function() {
   $('.removeSchedule').stop(true).slideToggle(200);
 })
@@ -738,7 +733,7 @@ function showTime() {
   }
 }
 
-var goldPersonList = ['Joseph Wokil', 'Peter Stahre', 'Oscar Dunnington', 'Emelie Hitzeroth', 'Anja Zethraeus'];
+var goldPersonList = ['Peter Stahre', 'Emelie Hitzeroth', 'Tim Thorén', 'Hedda Gustafsson'];
 
 function gold() {
   var goldArr = [];
