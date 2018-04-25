@@ -764,6 +764,34 @@ function meSign() {
   $('.meSign').css({'color': 'red', 'font-size': '12px', 'font-weight': 'bold'})
 }
 
-//gillar du min kod?
+var sommarlov = new Date('Jun 12, 2018 11:00:00').getTime();
+var now = today.getTime();
+
+var diff = sommarlov - now;
+
+var dagarSommar = Math.floor(diff / (1000 * 60 * 60 * 24));
+var timmarSommar = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+if (diff < (14 * (1000 * 60 * 60 * 24))) {
+  $('#sommarlov').append('<p style="font-weight:bold;font-size:20px;text-align:center;"><span style="color:red;">'+dagarSommar+' dagar </span>& <span style="color:red;">'+timmarSommar+' timmar</span> kvar till sommarlov</p>');
+  $('#intro').css('background', '-webkit-linear-gradient(left, #b3e0ff, #ff8080)');
+
+} else if (diff >= (14 * (1000 * 60 * 60 * 24))) {
+  $('#sommarlov').append('<p style="font-weight:bold;font-size:20px;text-align:center;"><span style="color:red;">'+dagarSommar+' dagar </span>kvar till sommarlov</p>');
+} else {
+  $('#sommarlov').append('<p style="font-weight:bold;font-size:20px;text-align:center;">"Vi" på rudebecks.me önskar dig ett rofyllt sommarlov, peace out</span>kvar till sommarlov</p>');
+}
+
+$('#sommarlov').click(function() {
+  $('#sommarlov p').append('!');
+})
+
+
+
+
+
+
 
 //© Thim Högberg 2018
+
+//hogberg.thim@gmail.com
